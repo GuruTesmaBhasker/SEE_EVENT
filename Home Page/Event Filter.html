@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE EVENT Event Type Filter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAF9F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .phone-frame {
+            width: 375px; /* Standard mobile width */
+            height: 812px; /* Standard mobile height */
+            background-color: #fff;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .notch {
+            width: 150px;
+            height: 30px;
+            background-color: #000;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .status-bar {
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 12px;
+            color: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 5;
+        }
+        .status-bar .time {
+            font-weight: 600;
+        }
+        .status-bar .icons {
+            display: flex;
+            gap: 5px;
+        }
+        .filter-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background-color: #fff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .filter-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .filter-option span {
+            font-weight: 500;
+            color: #3B3B3B;
+        }
+        .filter-option .check-icon {
+            color: #D66D4B;
+        }
+        .apply-button {
+            background-color: #D66D4B;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .apply-button:hover {
+            background-color: #C06040;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <div class="notch"></div>
+        <div class="status-bar">
+            <span class="time">9:41</span>
+            <div class="icons">
+                <span>📶</span>
+                <span>🔋</span>
+            </div>
+        </div>
+
+        <!-- Event Type Filter Content -->
+        <div class="flex flex-col flex-grow overflow-y-auto p-6">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Back to Home Page');">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">Filter by Event Type</h1>
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Clear Event Type Filters');">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Event Type Options -->
+            <div class="flex-grow overflow-y-auto pr-2 -mr-2">
+                <div class="filter-option">
+                    <span>Hackathon</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option">
+                    <span>Workshop</span>
+                </div>
+                <div class="filter-option">
+                    <span>Cultural Fest</span>
+                </div>
+                <div class="filter-option">
+                    <span>Technical Symposium</span>
+                </div>
+                <div class="filter-option">
+                    <span>Sports Event</span>
+                </div>
+                <div class="filter-option">
+                    <span>Guest Lecture</span>
+                </div>
+                <div class="filter-option">
+                    <span>Webinar</span>
+                </div>
+                <div class="filter-option">
+                    <span>Exhibition</span>
+                </div>
+            </div>
+
+            <!-- Apply Filters Button -->
+            <div class="sticky bottom-0 w-full p-6 bg-white shadow-lg rounded-t-2xl">
+                <button class="w-full apply-button">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
