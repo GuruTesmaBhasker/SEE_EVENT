@@ -116,11 +116,11 @@
 
         <!-- Forgot Password -->
         <div class="flex justify-end mb-8">
-          <a href="#" class="text-sm font-medium text-[#D66D4B] hover:underline">Forgot Password?</a>
+          <a href="#" onclick="goToForgotPassword()" class="text-sm font-medium text-[#D66D4B] hover:underline">Forgot Password?</a>
         </div>
 
         <!-- Login Button -->
-        <button class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
+        <button onclick="handleLogin()" class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
           Login
         </button>
 
@@ -137,7 +137,30 @@
   <!-- JS Logic -->
   <script>
     function goToSignup() {
-      window.location.href = '../Login page/Sign Up.html'; // Adjust path if needed
+      window.location.href = 'Sign Up .html'; // Corrected path with space in filename
+    }
+
+    function goToForgotPassword() {
+      window.location.href = 'Forget password.html'; // Navigate to forgot password page
+    }
+
+    function handleLogin() {
+      // Get form values
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Basic validation
+      if (!email || !password) {
+        alert('Please fill in both email and password!');
+        return;
+      }
+
+      // Simple validation for demo (you can integrate Firebase login later)
+      if (email && password) {
+        alert('Login successful! Welcome back!');
+        // Redirect to home page after successful login
+        window.location.href = '../Home Page/Home page.html';
+      }
     }
   </script>
 </body>

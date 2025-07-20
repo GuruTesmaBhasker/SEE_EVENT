@@ -127,9 +127,34 @@
                 Your Gateway to College Events
             </p>
 
+            <!-- Round Button with Arrow -->
+            <div class="flex flex-col items-center mb-6">
+                <button onclick="goToOnboarding()" class="w-16 h-16 rounded-full text-white font-bold shadow-lg transition-all duration-200 hover:bg-[#C06040] hover:scale-105 flex items-center justify-center mb-3" style="background-color: #D66D4B;">
+                    <!-- Arrow Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <!-- Text below button -->
+                <p class="text-sm font-semibold text-gray-700">LET'S START</p>
+            </div>
+
             <!-- Loader or Progress Bar (optional) -->
             <div class="loader"></div>
         </div>
     </div>
+
+    <!-- JavaScript for navigation -->
+    <script>
+        function goToOnboarding() {
+            window.location.href = "../On Boarding/On boarding 1.html";
+        }
+
+        // Optional: Auto-redirect after a few seconds if user doesn't click the button
+        setTimeout(function() {
+            // Uncomment the line below if you want auto-redirect after 5 seconds
+            // goToOnboarding();
+        }, 5000);
+    </script>
 </body>
 </html>

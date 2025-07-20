@@ -117,18 +117,26 @@
             </button>
         </div>
     </div>
+   
     <script>
-    // Redirect to home page when "Get Started" is clicked
-    document.querySelector("button:nth-of-type(1)").addEventListener("click", function() {
-        // Navigate to the home page
-        window.location.href = "../Login page/Login Page.html";
-    });
+        // Navigation functions
+        function finishOnboarding() {
+            window.location.href = "../Login page/Login Page.html";
+        }
 
-    // Redirect to home page when skipped
-    document.querySelector("button:nth-of-type(2)").addEventListener("click", function() {
-        // Navigate to the home page
-        window.location.href = "../Login page/Login Page.html";
-    });
-</script>
+        function goToLogin() {
+            window.location.href = "../Login page/Login Page.html";
+        }
+
+        // Add event listeners for onboarding page 3 (final page)
+        document.querySelector("button:nth-of-type(1)").addEventListener("click", function() {
+            finishOnboarding(); // Get Started - go to login page
+        });
+
+        document.querySelector("button:nth-of-type(2)").addEventListener("click", function() {
+            goToLogin(); // Skip to login page
+        });
+    </script>
+    
 </body>
 </html>
