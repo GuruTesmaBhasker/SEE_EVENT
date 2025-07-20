@@ -1,6 +1,6 @@
 # SeeEvent – College & Local Event Discovery App
 
-SeeEvent is a mobile application designed to help students and users discover, register for, and manage events happening around their college and city. The app provides a user-friendly experience for both participants and event organizers.
+SeeEvent is a website designed to help students and users discover, register for, and manage events happening around their college and city. The app provides a user-friendly experience for both participants and event organizers.
 
 ---
 
@@ -61,14 +61,7 @@ SeeEvent is a mobile application designed to help students and users discover, r
 - About Us Page  
 - Terms & Conditions / Privacy Policy Page
 
----
 
-## Tech Stack
-
-- Android Studio
-- Kotlin / Java (based on implementation)
-- XML for UI layout
-- Firebase or other backend (if integrated)
 
 ---
 
