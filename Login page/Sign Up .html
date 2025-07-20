@@ -132,6 +132,38 @@
             </div>
         </div>
     </div>
-    <script type="module" src="./firebase.js"></script>
+    <script type="module">
+        // Import Firebase functions
+        import { auth } from "../firebase.js";
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        // Add event listener to the Sign Up button
+        document.querySelector("button").addEventListener("click", async function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById("fullname").value;
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            // Basic validation
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+
+            try {
+                // Create user account
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                console.log("User created:", userCredential.user);
+                alert("Account created successfully!");
+                // Redirect to home page or login
+                window.location.href = "../Home Page/Home page.html";
+            } catch (error) {
+                console.error("Error creating account:", error);
+                alert("Error creating account: " + error.message);
+            }
+        });
+    </script>
 </body>
 </html>
