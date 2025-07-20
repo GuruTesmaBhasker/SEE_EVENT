@@ -15,60 +15,69 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
             overflow: hidden;
         }
-        .phone-frame {
-            width: 375px;
-            height: 812px;
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
             background-color: #fff;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
-        .notch {
-            width: 150px;
-            height: 30px;
-            background-color: #000;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
+
+        /* Responsive text and image sizing */
+        .text-2xl-responsive {
+            font-size: clamp(1.5rem, 5vw, 2rem);
         }
-        .status-bar {
-            height: 44px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 12px;
-            color: #000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 5;
+        .text-base-responsive {
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
-        .status-bar .time {
-            font-weight: 600;
+        .illustration-responsive {
+            width: clamp(200px, 60vw, 300px);
+            height: clamp(200px, 60vw, 300px);
         }
-        .status-bar .icons {
-            display: flex;
-            gap: 5px;
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .text-2xl-responsive {
+                font-size: clamp(1.25rem, 6vw, 1.75rem);
+            }
+            .text-base-responsive {
+                font-size: clamp(0.85rem, 4vw, 0.95rem);
+            }
+            .illustration-responsive {
+                width: clamp(180px, 50vw, 250px);
+                height: clamp(180px, 50vw, 250px);
+            }
         }
-        .onboarding-image {
-            width: 80%;
-            height: auto;
-            max-height: 300px;
-            object-fit: contain;
-            margin-bottom: 32px;
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .text-2xl-responsive {
+                font-size: clamp(1.75rem, 4vw, 2.25rem);
+            }
+            .illustration-responsive {
+                width: clamp(250px, 40vw, 350px);
+                height: clamp(250px, 40vw, 350px);
+            }
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: clamp(2rem, 3vw, 2.5rem);
+            }
+            .text-base-responsive {
+                font-size: clamp(1rem, 2vw, 1.25rem);
+            }
+            .illustration-responsive {
+                width: clamp(300px, 35vw, 400px);
+                height: clamp(300px, 35vw, 400px);
+            }
         }
         .dot-indicator {
             width: 8px;
@@ -83,22 +92,13 @@
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
-    <div class="phone-frame">
-        <div class="notch"></div>
-        <div class="status-bar">
-            <span class="time">9:41</span>
-            <div class="icons">
-                <span>📶</span>
-                <span>🔋</span>
-            </div>
-        </div>
-
+    <div class="main-container">
         <!-- Onboarding Content -->
         <div class="flex flex-col items-center justify-between h-full w-full p-8 pt-20">
             <div class="flex flex-col items-center flex-grow justify-center">
-                <img src="https://placehold.co/300x250/F5E7E2/D66D4B?text=Manage+Events" alt="Manage Events" class="onboarding-image rounded-xl">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Organize & Promote Your Events</h2>
-                <p class="text-base text-gray-600 text-center px-4">
+                <img src="https://placehold.co/300x250/F5E7E2/D66D4B?text=Manage+Events" alt="Manage Events" class="illustration-responsive rounded-xl mb-8">
+                <h2 class="text-2xl-responsive font-bold text-gray-800 mb-4 text-center">Organize & Promote Your Events</h2>
+                <p class="text-base-responsive text-gray-600 text-center px-4">
                     College management can easily upload, manage, and promote their events to a wider audience.
                 </p>
             </div>
@@ -109,12 +109,14 @@
                 <div class="dot-indicator active"></div>
             </div>
 
-            <button class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
-                Get Started
-            </button>
-            <button class="w-full py-3 mt-4 rounded-xl text-gray-600 font-semibold transition-colors duration-200 hover:text-gray-800">
-                Skip
-            </button>
+            <div class="w-full max-w-sm mx-auto px-4">
+                <button onclick="nextPage(3)" class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
+                    Get Started
+                </button>
+                <button onclick="goToLogin()" class="w-full py-3 mt-4 rounded-xl text-gray-600 font-semibold transition-colors duration-200 hover:text-gray-800">
+                    Skip
+                </button>
+            </div>
         </div>
     </div>
    
