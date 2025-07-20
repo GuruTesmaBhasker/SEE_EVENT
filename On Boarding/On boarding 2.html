@@ -117,5 +117,18 @@
             </button>
         </div>
     </div>
+    <script>
+    // Redirect to the next onboarding screen
+    document.querySelector("button:nth-of-type(1)").addEventListener("click", function() {
+        // Navigate to the next onboarding screen (On boarding 3)
+        window.location.href = "On boarding 3.html";
+    });
+
+    // Redirect to home page when skipped
+    document.querySelector("button:nth-of-type(2)").addEventListener("click", function() {
+        // Navigate to the home page
+        window.location.href = "../Home Page/Home page.html";
+    });
+</script>
 </body>
 </html>

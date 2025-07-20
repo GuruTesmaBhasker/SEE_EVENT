@@ -30,18 +30,7 @@
             display: flex;
             flex-direction: column;
         }
-        .notch {
-            width: 150px;
-            height: 30px;
-            background-color: #000;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
+    
         .status-bar {
             height: 44px;
             display: flex;
@@ -117,6 +106,20 @@
             </button>
         </div>
     </div>
+    <script>
+    // Redirect to the next onboarding screen
+    document.querySelector("button:nth-of-type(1)").addEventListener("click", function() {
+        // Navigate to the actual next onboarding screen
+        window.location.href = "On boarding 2.html";
+    });
+
+    // Redirect to home page when skipped
+    document.querySelector("button:nth-of-type(2)").addEventListener("click", function() {
+        // Navigate to the home page
+        window.location.href = "../Home Page/Home page.html";
+    });
+</script>
+
 </body>
 
 </html>
