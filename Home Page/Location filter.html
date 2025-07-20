@@ -116,15 +116,15 @@
         <div class="flex flex-col flex-grow overflow-y-auto p-6">
             <!-- Header -->
             <div class="flex items-center justify-between mb-6">
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Back to Home Page');">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToHome();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <h1 class="text-2xl font-bold text-gray-800">Filter by Location</h1>
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Clear Location Filters');">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="clearAllFilters();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                 </button>
             </div>
@@ -132,53 +132,431 @@
             <!-- Search Location Input -->
             <div class="mb-6">
                 <div class="relative">
-                    <input type="text" placeholder="Search city or college" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#D66D4B] focus:border-transparent text-gray-700">
+                    <input type="text" id="locationSearch" placeholder="Search city or college" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#D66D4B] focus:border-transparent text-gray-700" oninput="searchLocations();" onkeydown="handleKeyNavigation(event);">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
+                    <!-- Search Suggestions Dropdown -->
+                    <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 mt-1 hidden max-h-48 overflow-y-auto">
+                        <!-- Suggestions will be populated by JavaScript -->
+                    </div>
                 </div>
             </div>
 
             <!-- Location Options -->
-            <div class="flex-grow overflow-y-auto pr-2 -mr-2">
-                <div class="filter-option">
+            <div class="flex-grow overflow-y-auto pr-2 -mr-2" id="locationList">
+                <div class="filter-option" onclick="toggleLocation('Coimbatore', this);">
                     <span>Coimbatore</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Chennai', this);">
                     <span>Chennai</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Bengaluru', this);">
                     <span>Bengaluru</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Hyderabad', this);">
                     <span>Hyderabad</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Mumbai', this);">
                     <span>Mumbai</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Delhi', this);">
                     <span>Delhi</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Pune', this);">
                     <span>Pune</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="filter-option">
+                <div class="filter-option" onclick="toggleLocation('Kochi', this);">
                     <span>Kochi</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
             </div>
 
             <!-- Apply Filters Button -->
             <div class="sticky bottom-0 w-full p-6 bg-white shadow-lg rounded-t-2xl">
-                <button class="w-full apply-button">
+                <button class="w-full apply-button" onclick="applyLocationFilters();">
                     Apply Filters
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Location Filter functionality -->
+    <script>
+        let selectedLocations = [];
+        let currentSuggestionIndex = -1;
+        
+        // Top-tier cities with additional details
+        const topTierCities = [
+            { name: 'Mumbai', state: 'Maharashtra', events: 15 },
+            { name: 'Delhi', state: 'Delhi', events: 12 },
+            { name: 'Bengaluru', state: 'Karnataka', events: 18 },
+            { name: 'Chennai', state: 'Tamil Nadu', events: 10 },
+            { name: 'Hyderabad', state: 'Telangana', events: 8 },
+            { name: 'Pune', state: 'Maharashtra', events: 14 },
+            { name: 'Kolkata', state: 'West Bengal', events: 6 },
+            { name: 'Ahmedabad', state: 'Gujarat', events: 7 },
+            { name: 'Jaipur', state: 'Rajasthan', events: 5 },
+            { name: 'Surat', state: 'Gujarat', events: 4 },
+            { name: 'Lucknow', state: 'Uttar Pradesh', events: 3 },
+            { name: 'Kanpur', state: 'Uttar Pradesh', events: 2 },
+            { name: 'Nagpur', state: 'Maharashtra', events: 3 },
+            { name: 'Indore', state: 'Madhya Pradesh', events: 4 },
+            { name: 'Thane', state: 'Maharashtra', events: 5 },
+            { name: 'Bhopal', state: 'Madhya Pradesh', events: 3 },
+            { name: 'Visakhapatnam', state: 'Andhra Pradesh', events: 2 },
+            { name: 'Pimpri-Chinchwad', state: 'Maharashtra', events: 3 },
+            { name: 'Patna', state: 'Bihar', events: 2 },
+            { name: 'Vadodara', state: 'Gujarat', events: 4 },
+            { name: 'Coimbatore', state: 'Tamil Nadu', events: 6 },
+            { name: 'Kochi', state: 'Kerala', events: 5 },
+            { name: 'Chandigarh', state: 'Punjab', events: 3 },
+            { name: 'Mysore', state: 'Karnataka', events: 2 }
+        ];
+
+        // Navigate back to home page
+        function goBackToHome() {
+            window.location.href = 'Home page.html';
+        }
+
+        // Clear all selected filters
+        function clearAllFilters() {
+            selectedLocations = [];
+            // Remove all check marks
+            const checkIcons = document.querySelectorAll('.check-icon');
+            checkIcons.forEach(icon => {
+                icon.style.display = 'none';
+            });
+            // Clear search input
+            document.getElementById('locationSearch').value = '';
+            // Hide suggestions
+            hideSuggestions();
+            // Show all locations
+            showAllLocations();
+        }
+
+        // Toggle location selection
+        function toggleLocation(locationName, element) {
+            const checkIcon = element.querySelector('.check-icon');
+            
+            if (selectedLocations.includes(locationName)) {
+                // Remove from selected
+                selectedLocations = selectedLocations.filter(loc => loc !== locationName);
+                checkIcon.style.display = 'none';
+            } else {
+                // Add to selected
+                selectedLocations.push(locationName);
+                checkIcon.style.display = 'block';
+            }
+        }
+
+        // Search functionality with auto-suggestions
+        function searchLocations() {
+            const searchTerm = document.getElementById('locationSearch').value.toLowerCase().trim();
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (searchTerm.length === 0) {
+                hideSuggestions();
+                showAllLocations();
+                return;
+            }
+
+            // Filter cities based on search term
+            const matchingCities = topTierCities.filter(city => 
+                city.name.toLowerCase().includes(searchTerm) || 
+                city.state.toLowerCase().includes(searchTerm)
+            );
+
+            // Show suggestions including option to add custom city
+            showSuggestions(matchingCities, searchTerm);
+
+            // Also filter the existing location list
+            filterExistingLocations(searchTerm);
+        }
+
+        // Show search suggestions
+        function showSuggestions(cities, searchTerm) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            currentSuggestionIndex = -1;
+            
+            suggestionsContainer.innerHTML = '';
+            
+            // Show matching cities first
+            cities.slice(0, 6).forEach((city, index) => {
+                const suggestionDiv = document.createElement('div');
+                suggestionDiv.className = 'p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100';
+                suggestionDiv.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="font-medium text-gray-800">${city.name}</span>
+                            <span class="text-sm text-gray-500 ml-2">${city.state}</span>
+                        </div>
+                        <span class="text-xs text-[#D66D4B] bg-[#F5E7E2] px-2 py-1 rounded-full">${city.events} events</span>
+                    </div>
+                `;
+                
+                suggestionDiv.onclick = () => selectSuggestion(city.name);
+                suggestionsContainer.appendChild(suggestionDiv);
+            });
+
+            // Add option to add custom city if no exact match found
+            const exactMatch = cities.find(city => city.name.toLowerCase() === searchTerm);
+            if (!exactMatch && searchTerm.length >= 2) {
+                const customCityDiv = document.createElement('div');
+                customCityDiv.className = 'p-3 hover:bg-gray-50 cursor-pointer border-t-2 border-[#D66D4B] bg-[#FAF9F6]';
+                customCityDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <div>
+                            <span class="font-medium text-[#D66D4B]">Add "${capitalizeFirstLetter(searchTerm)}"</span>
+                            <div class="text-sm text-gray-500">Add this city to your filters</div>
+                        </div>
+                    </div>
+                `;
+                
+                customCityDiv.onclick = () => addCustomCity(capitalizeFirstLetter(searchTerm));
+                suggestionsContainer.appendChild(customCityDiv);
+            }
+            
+            suggestionsContainer.classList.remove('hidden');
+        }
+
+        // Add custom city to the location list
+        function addCustomCity(cityName) {
+            // Check if city already exists in the list
+            const existingLocation = Array.from(document.querySelectorAll('.filter-option span')).find(
+                span => span.textContent === cityName
+            );
+            
+            if (existingLocation) {
+                // If it exists, just select it
+                selectSuggestion(cityName);
+                return;
+            }
+
+            // Create new location option
+            const locationList = document.getElementById('locationList');
+            const newLocationDiv = document.createElement('div');
+            newLocationDiv.className = 'filter-option';
+            newLocationDiv.onclick = () => toggleLocation(cityName, newLocationDiv);
+            
+            newLocationDiv.innerHTML = `
+                <div class="flex items-center">
+                    <span>${cityName}</span>
+                    <span class="text-xs text-[#D66D4B] bg-[#F5E7E2] px-2 py-1 rounded-full ml-2">Custom</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            `;
+            
+            // Insert at the top of the list
+            locationList.insertBefore(newLocationDiv, locationList.firstChild);
+            
+            // Auto-select the new city
+            toggleLocation(cityName, newLocationDiv);
+            
+            // Clear search and hide suggestions
+            document.getElementById('locationSearch').value = '';
+            hideSuggestions();
+            
+            // Show success message
+            showCustomCityMessage(cityName);
+        }
+
+        // Show message when custom city is added
+        function showCustomCityMessage(cityName) {
+            // Create temporary message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    "${cityName}" added and selected!
+                </div>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                messageDiv.style.opacity = '0';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }, 2700);
+        }
+
+        // Capitalize first letter of each word
+        function capitalizeFirstLetter(str) {
+            return str.split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+        }
+
+        // Hide suggestions
+        function hideSuggestions() {
+            document.getElementById('searchSuggestions').classList.add('hidden');
+            currentSuggestionIndex = -1;
+        }
+
+        // Select a suggestion
+        function selectSuggestion(cityName) {
+            document.getElementById('locationSearch').value = cityName;
+            hideSuggestions();
+            
+            // Auto-select this location if it exists in the list
+            const locationOptions = document.querySelectorAll('.filter-option');
+            locationOptions.forEach(option => {
+                const spanText = option.querySelector('span').textContent;
+                if (spanText === cityName) {
+                    option.style.display = 'flex';
+                    // Auto-select it
+                    if (!selectedLocations.includes(cityName)) {
+                        toggleLocation(cityName, option);
+                    }
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        // Handle keyboard navigation for suggestions
+        function handleKeyNavigation(event) {
+            const suggestions = document.querySelectorAll('#searchSuggestions > div');
+            
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                currentSuggestionIndex = Math.min(currentSuggestionIndex + 1, suggestions.length - 1);
+                highlightSuggestion(suggestions);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                currentSuggestionIndex = Math.max(currentSuggestionIndex - 1, -1);
+                highlightSuggestion(suggestions);
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                if (currentSuggestionIndex >= 0 && suggestions[currentSuggestionIndex]) {
+                    suggestions[currentSuggestionIndex].click();
+                } else {
+                    // If no suggestion is selected, try to add as custom city
+                    const searchTerm = document.getElementById('locationSearch').value.trim();
+                    if (searchTerm.length >= 2) {
+                        addCustomCity(capitalizeFirstLetter(searchTerm));
+                    }
+                }
+            } else if (event.key === 'Escape') {
+                hideSuggestions();
+            }
+        }
+
+        // Highlight current suggestion
+        function highlightSuggestion(suggestions) {
+            suggestions.forEach((suggestion, index) => {
+                if (index === currentSuggestionIndex) {
+                    suggestion.classList.add('bg-gray-100');
+                } else {
+                    suggestion.classList.remove('bg-gray-100');
+                }
+            });
+        }
+
+        // Filter existing location options
+        function filterExistingLocations(searchTerm) {
+            const locationOptions = document.querySelectorAll('.filter-option');
+            
+            locationOptions.forEach(option => {
+                const locationText = option.querySelector('span').textContent.toLowerCase();
+                if (locationText.includes(searchTerm)) {
+                    option.style.display = 'flex';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        // Show all locations (for clearing search)
+        function showAllLocations() {
+            const locationOptions = document.querySelectorAll('.filter-option');
+            locationOptions.forEach(option => {
+                option.style.display = 'flex';
+            });
+        }
+
+        // Apply location filters and return to home page
+        function applyLocationFilters() {
+            if (selectedLocations.length > 0) {
+                // Store selected locations in localStorage for the home page to use
+                localStorage.setItem('selectedLocations', JSON.stringify(selectedLocations));
+                alert('Location filters applied: ' + selectedLocations.join(', '));
+            } else {
+                // Clear any existing location filters
+                localStorage.removeItem('selectedLocations');
+                alert('No locations selected. All locations will be shown.');
+            }
+            
+            // Navigate back to home page
+            goBackToHome();
+        }
+
+        // Load previously selected locations when page loads
+        window.onload = function() {
+            const savedLocations = localStorage.getItem('selectedLocations');
+            if (savedLocations) {
+                selectedLocations = JSON.parse(savedLocations);
+                
+                // Show check marks for previously selected locations
+                selectedLocations.forEach(locationName => {
+                    const locationOptions = document.querySelectorAll('.filter-option');
+                    locationOptions.forEach(option => {
+                        const spanText = option.querySelector('span').textContent;
+                        if (spanText === locationName) {
+                            option.querySelector('.check-icon').style.display = 'block';
+                        }
+                    });
+                });
+            }
+        };
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchInput = document.getElementById('locationSearch');
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                hideSuggestions();
+            }
+        });
+    </script>
 </body>
 </html>

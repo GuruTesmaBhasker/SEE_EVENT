@@ -116,15 +116,15 @@
         <div class="flex flex-col flex-grow overflow-y-auto p-6">
             <!-- Header -->
             <div class="flex items-center justify-between mb-6">
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Back to Home Page');">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToHome();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <h1 class="text-2xl font-bold text-gray-800">Filter by Date</h1>
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Clear Date Filters');">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="clearAllFilters();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                 </button>
             </div>
@@ -133,42 +133,426 @@
             <div class="mb-6 bg-white p-4 rounded-xl shadow-sm">
                 <p class="text-center text-gray-700 font-medium mb-4">Select Date Range</p>
                 <div class="flex justify-between items-center mb-4">
-                    <input type="date" class="w-5/12 p-2 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#D66D4B]">
+                    <input type="date" id="startDate" min="2025-01-01" max="2030-12-31" class="w-5/12 p-2 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#D66D4B]" onchange="handleCustomDateRange();">
                     <span class="text-gray-500">-</span>
-                    <input type="date" class="w-5/12 p-2 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#D66D4B]">
+                    <input type="date" id="endDate" min="2025-01-01" max="2030-12-31" class="w-5/12 p-2 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#D66D4B]" onchange="handleCustomDateRange();">
                 </div>
                 <p class="text-center text-sm text-gray-500">Or choose a quick option:</p>
             </div>
 
             <!-- Quick Date Options -->
-            <div class="flex-grow overflow-y-auto pr-2 -mr-2">
-                <div class="date-option">
-                    <span>Today</span>
-                </div>
-                <div class="date-option">
-                    <span>This Weekend</span>
-                </div>
-                <div class="date-option">
-                    <span>Next 7 Days</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="flex-grow overflow-y-auto pr-2 -mr-2" id="dateOptionsList">
+                <div class="date-option" onclick="selectQuickOption('today', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <div>
+                            <span>Today</span>
+                            <div class="text-sm text-gray-500" id="todayDate">July 20, 2025</div>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <div class="date-option">
-                    <span>This Month</span>
+                <div class="date-option" onclick="selectQuickOption('weekend', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <div>
+                            <span>This Weekend</span>
+                            <div class="text-sm text-gray-500" id="weekendDates">Sat 26 - Sun 27 Jul</div>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-                <div class="date-option">
-                    <span>Next Month</span>
+                <div class="date-option" onclick="selectQuickOption('week', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                        </svg>
+                        <div>
+                            <span>Next 7 Days</span>
+                            <div class="text-sm text-gray-500" id="weekDates">July 20 - 27, 2025</div>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="date-option" onclick="selectQuickOption('month', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <div>
+                            <span>This Month</span>
+                            <div class="text-sm text-gray-500" id="monthDates">July 2025</div>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="date-option" onclick="selectQuickOption('nextMonth', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <div>
+                            <span>Next Month</span>
+                            <div class="text-sm text-gray-500" id="nextMonthDates">August 2025</div>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
             </div>
 
             <!-- Apply Filters Button -->
             <div class="sticky bottom-0 w-full p-6 bg-white shadow-lg rounded-t-2xl">
-                <button class="w-full apply-button">
+                <button class="w-full apply-button" onclick="applyDateFilters();">
                     Apply Filters
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Date Filter functionality -->
+    <script>
+        let selectedDateRange = null;
+        let selectedQuickOption = null;
+
+        // Navigate back to home page
+        function goBackToHome() {
+            window.location.href = 'Home page.html';
+        }
+
+        // Clear all selected filters
+        function clearAllFilters() {
+            selectedDateRange = null;
+            selectedQuickOption = null;
+            
+            // Clear custom date inputs
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            
+            // Remove all check marks
+            const checkIcons = document.querySelectorAll('.check-icon');
+            checkIcons.forEach(icon => {
+                icon.style.display = 'none';
+            });
+            
+            // Update date labels
+            updateDateLabels();
+        }
+
+        // Select quick date option
+        function selectQuickOption(option, element) {
+            // Clear previous selections
+            const checkIcons = document.querySelectorAll('.check-icon');
+            checkIcons.forEach(icon => {
+                icon.style.display = 'none';
+            });
+            
+            // Clear custom date inputs
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            
+            // Set new selection
+            selectedQuickOption = option;
+            selectedDateRange = calculateDateRange(option);
+            
+            // Show check mark for selected option
+            const checkIcon = element.querySelector('.check-icon');
+            checkIcon.style.display = 'block';
+            
+            // Update date range inputs to reflect selection
+            updateDateInputs(selectedDateRange);
+        }
+
+        // Handle custom date range selection
+        function handleCustomDateRange() {
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            const startDate = startDateInput.value;
+            const endDate = endDateInput.value;
+            
+            // Clear quick option selections when user selects custom dates
+            const checkIcons = document.querySelectorAll('.check-icon');
+            checkIcons.forEach(icon => {
+                icon.style.display = 'none';
+            });
+            
+            if (startDate && endDate) {
+                // Create date objects and validate
+                const startDateObj = new Date(startDate + 'T00:00:00');
+                const endDateObj = new Date(endDate + 'T00:00:00');
+                
+                // Validate date range
+                if (startDateObj > endDateObj) {
+                    alert('Start date cannot be after end date');
+                    // Reset the problematic date
+                    if (startDateInput === document.activeElement) {
+                        startDateInput.value = '';
+                    } else {
+                        endDateInput.value = '';
+                    }
+                    return;
+                }
+                
+                // Check if dates are not in the past (optional validation)
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (startDateObj < today) {
+                    const confirm = window.confirm('Start date is in the past. Are you sure you want to continue?');
+                    if (!confirm) {
+                        startDateInput.value = '';
+                        return;
+                    }
+                }
+                
+                selectedDateRange = {
+                    start: startDateObj,
+                    end: endDateObj
+                };
+                selectedQuickOption = 'custom';
+                
+                console.log('Custom date range selected:', selectedDateRange);
+            } else if (startDate || endDate) {
+                // Only one date selected, keep partial selection
+                selectedDateRange = null;
+                selectedQuickOption = null;
+            }
+        }
+
+        // Calculate date range based on quick option
+        function calculateDateRange(option) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            switch (option) {
+                case 'today':
+                    return {
+                        start: new Date(today),
+                        end: new Date(today)
+                    };
+                
+                case 'weekend':
+                    const dayOfWeek = today.getDay();
+                    const saturday = new Date(today);
+                    saturday.setDate(today.getDate() + (6 - dayOfWeek));
+                    const sunday = new Date(saturday);
+                    sunday.setDate(saturday.getDate() + 1);
+                    return {
+                        start: saturday,
+                        end: sunday
+                    };
+                
+                case 'week':
+                    const weekEnd = new Date(today);
+                    weekEnd.setDate(today.getDate() + 7);
+                    return {
+                        start: new Date(today),
+                        end: weekEnd
+                    };
+                
+                case 'month':
+                    const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+                    const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                    return {
+                        start: monthStart,
+                        end: monthEnd
+                    };
+                
+                case 'nextMonth':
+                    const nextMonthStart = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+                    const nextMonthEnd = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+                    return {
+                        start: nextMonthStart,
+                        end: nextMonthEnd
+                    };
+                
+                default:
+                    return null;
+            }
+        }
+
+        // Update date input fields
+        function updateDateInputs(dateRange) {
+            if (dateRange) {
+                document.getElementById('startDate').value = formatDateForInput(dateRange.start);
+                document.getElementById('endDate').value = formatDateForInput(dateRange.end);
+            }
+        }
+
+        // Format date for input field (YYYY-MM-DD)
+        function formatDateForInput(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Format date for display
+        function formatDateForDisplay(date) {
+            return date.toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // Format short date for display
+        function formatShortDate(date) {
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Update date labels in the quick options
+        function updateDateLabels() {
+            const today = new Date();
+            
+            // Update today date
+            document.getElementById('todayDate').textContent = formatDateForDisplay(today);
+            
+            // Update weekend dates
+            const dayOfWeek = today.getDay();
+            const saturday = new Date(today);
+            saturday.setDate(today.getDate() + (6 - dayOfWeek));
+            const sunday = new Date(saturday);
+            sunday.setDate(saturday.getDate() + 1);
+            document.getElementById('weekendDates').textContent = 
+                `${formatShortDate(saturday)} - ${formatShortDate(sunday)}`;
+            
+            // Update week dates
+            const weekEnd = new Date(today);
+            weekEnd.setDate(today.getDate() + 7);
+            document.getElementById('weekDates').textContent = 
+                `${formatDateForDisplay(today)} - ${formatDateForDisplay(weekEnd)}`;
+            
+            // Update month dates
+            document.getElementById('monthDates').textContent = 
+                today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            // Update next month dates
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+            document.getElementById('nextMonthDates').textContent = 
+                nextMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        }
+
+        // Apply date filters and return to home page
+        function applyDateFilters() {
+            if (selectedDateRange) {
+                const filterData = {
+                    startDate: selectedDateRange.start.toISOString(),
+                    endDate: selectedDateRange.end.toISOString(),
+                    quickOption: selectedQuickOption,
+                    displayText: getFilterDisplayText()
+                };
+                
+                // Store selected date range in localStorage for the home page to use
+                localStorage.setItem('selectedDateRange', JSON.stringify(filterData));
+                alert('Date filters applied: ' + filterData.displayText);
+            } else {
+                // Clear any existing date filters
+                localStorage.removeItem('selectedDateRange');
+                alert('No date range selected. All dates will be shown.');
+            }
+            
+            // Navigate back to home page
+            goBackToHome();
+        }
+
+        // Get display text for selected filter
+        function getFilterDisplayText() {
+            if (!selectedDateRange) return '';
+            
+            if (selectedQuickOption === 'today') {
+                return 'Today';
+            } else if (selectedQuickOption === 'weekend') {
+                return 'This Weekend';
+            } else if (selectedQuickOption === 'week') {
+                return 'Next 7 Days';
+            } else if (selectedQuickOption === 'month') {
+                return 'This Month';
+            } else if (selectedQuickOption === 'nextMonth') {
+                return 'Next Month';
+            } else {
+                // Custom date range
+                return `${formatShortDate(selectedDateRange.start)} - ${formatShortDate(selectedDateRange.end)}`;
+            }
+        }
+
+        // Check if a date is within the selected range
+        function isDateInRange(eventDate, dateRange) {
+            const date = new Date(eventDate);
+            date.setHours(0, 0, 0, 0);
+            
+            const start = new Date(dateRange.start);
+            start.setHours(0, 0, 0, 0);
+            
+            const end = new Date(dateRange.end);
+            end.setHours(23, 59, 59, 999);
+            
+            return date >= start && date <= end;
+        }
+
+        // Load previously selected date range when page loads
+        window.onload = function() {
+            // Set default min date for date inputs to today
+            const today = new Date();
+            const todayString = formatDateForInput(today);
+            document.getElementById('startDate').min = todayString;
+            document.getElementById('endDate').min = todayString;
+            
+            // Update date labels with current dates
+            updateDateLabels();
+            
+            // Load saved date filters
+            const savedDateRange = localStorage.getItem('selectedDateRange');
+            if (savedDateRange) {
+                try {
+                    const filterData = JSON.parse(savedDateRange);
+                    selectedDateRange = {
+                        start: new Date(filterData.startDate),
+                        end: new Date(filterData.endDate)
+                    };
+                    selectedQuickOption = filterData.quickOption;
+                    
+                    // Update UI to show selected filter
+                    updateDateInputs(selectedDateRange);
+                    
+                    if (selectedQuickOption && selectedQuickOption !== 'custom') {
+                        // Find and select the appropriate quick option
+                        const quickOptions = document.querySelectorAll('.date-option');
+                        quickOptions.forEach(option => {
+                            const span = option.querySelector('span').textContent.toLowerCase();
+                            if (
+                                (selectedQuickOption === 'today' && span.includes('today')) ||
+                                (selectedQuickOption === 'weekend' && span.includes('weekend')) ||
+                                (selectedQuickOption === 'week' && span.includes('7 days')) ||
+                                (selectedQuickOption === 'month' && span.includes('this month')) ||
+                                (selectedQuickOption === 'nextMonth' && span.includes('next month'))
+                            ) {
+                                option.querySelector('.check-icon').style.display = 'block';
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error loading saved date range:', error);
+                    localStorage.removeItem('selectedDateRange');
+                }
+            }
+        };
+    </script>
 </body>
 </html>
