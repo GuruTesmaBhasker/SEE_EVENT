@@ -15,19 +15,46 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
             overflow: hidden;
         }
-        .phone-frame {
-            width: 375px; /* Standard mobile width */
-            height: 812px; /* Standard mobile height */
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
             background-color: #fff;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
             display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .text-lg-responsive {
+                font-size: 1.5rem; /* 24px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 3rem 4rem;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            button {
+                font-size: 18px !important;
+                padding: 16px 24px !important;
+            }
+            p {
+                font-size: 18px !important;
+                line-height: 1.8 !important;
+            }
+            h3 {
+                font-size: 24px !important;
+            }
+        }
+    </style>
             flex-direction: column;
         }
         .notch {

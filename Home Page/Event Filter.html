@@ -15,54 +15,20 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
             overflow: hidden;
         }
-        .phone-frame {
-            width: 375px; /* Standard mobile width */
-            height: 812px; /* Standard mobile height */
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
             background-color: #fff;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
-        .notch {
-            width: 150px;
-            height: 30px;
-            background-color: #000;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-        .status-bar {
-            height: 44px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 12px;
-            color: #000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 5;
-        }
-        .status-bar .time {
-            font-weight: 600;
-        }
-        .status-bar .icons {
-            display: flex;
-            gap: 5px;
-        }
+
         .filter-option {
             display: flex;
             align-items: center;
@@ -79,41 +45,104 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        .filter-option span {
-            font-weight: 500;
-            color: #3B3B3B;
+        .filter-option.selected {
+            background-color: #F5E7E2;
+            border: 2px solid #D66D4B;
+            box-shadow: 0 0 0 3px rgba(214, 109, 75, 0.2);
+            transform: translateY(-1px);
         }
-        .filter-option .check-icon {
-            color: #D66D4B;
-        }
+
         .apply-button {
             background-color: #D66D4B;
             color: #fff;
-            padding: 12px 20px;
+            padding: 16px 20px;
             border-radius: 16px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 16px;
         }
         .apply-button:hover {
             background-color: #C06040;
         }
+
+        /* Responsive text sizing */
+        .text-2xl-responsive {
+            font-size: 1.5rem; /* Default mobile size */
+        }
+        .text-lg-responsive {
+            font-size: 1.125rem; /* Default mobile size */
+        }
+        .text-base-responsive {
+            font-size: 1rem; /* Default mobile size */
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .text-2xl-responsive {
+                font-size: 2rem; /* 32px - tablet */
+            }
+            .text-lg-responsive {
+                font-size: 1.25rem; /* 20px - tablet */
+            }
+            .main-content {
+                padding: 2rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .text-lg-responsive {
+                font-size: 1.5rem; /* 24px - LARGE desktop size */
+            }
+            .text-base-responsive {
+                font-size: 1.25rem; /* 20px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 3rem 4rem;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .filter-option {
+                padding: 20px !important;
+                margin-bottom: 16px !important;
+            }
+            .filter-option span {
+                font-size: 18px !important;
+            }
+            button {
+                font-size: 20px !important;
+                padding: 18px 24px !important;
+            }
+            input {
+                font-size: 18px !important;
+                padding: 16px 20px !important;
+            }
+            #eventTypeSearch {
+                font-size: 18px !important;
+                padding: 16px 20px 16px 50px !important;
+            }
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
-    <div class="phone-frame">
-        <div class="notch"></div>
-        <div class="status-bar">
-            <span class="time">9:41</span>
-            <div class="icons">
-                <span>📶</span>
-                <span>🔋</span>
-            </div>
-        </div>
-
+    <div class="main-container">
         <!-- Event Type Filter Content -->
-        <div class="flex flex-col flex-grow overflow-y-auto p-6">
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
             <!-- Header -->
             <div class="flex items-center justify-between mb-6">
                 <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToHome();">
@@ -121,7 +150,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h1 class="text-2xl font-bold text-gray-800">Filter by Event Type</h1>
+                <h1 class="text-2xl-responsive font-bold text-gray-800">Filter by Event Type</h1>
                 <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="clearAllFilters();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -132,12 +161,18 @@
             <!-- Search Event Type Input -->
             <div class="mb-6">
                 <div class="relative">
-                    <input type="text" id="eventTypeSearch" placeholder="Search event types" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#D66D4B] focus:border-transparent text-gray-700" oninput="searchEventTypes();" onkeydown="handleKeyNavigation(event);">
+                    <input type="text" id="eventTypeSearch" placeholder="Search event types" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#D66D4B] focus:border-transparent text-gray-700" oninput="searchEventTypes();" onkeydown="handleKeyNavigation(event);" autocomplete="off">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
+                    <!-- Clear search button -->
+                    <button id="clearEventTypeSearch" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600" onclick="clearSearchAndSuggestions();" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                     <!-- Search Suggestions Dropdown -->
                     <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 mt-1 hidden max-h-48 overflow-y-auto">
                         <!-- Suggestions will be populated by JavaScript -->
@@ -277,13 +312,21 @@
         // Clear all selected filters
         function clearAllFilters() {
             selectedEventTypes = [];
-            // Remove all check marks
+            // Remove all check marks and selected classes
             const checkIcons = document.querySelectorAll('.check-icon');
+            const filterOptions = document.querySelectorAll('.filter-option');
+            
             checkIcons.forEach(icon => {
                 icon.style.display = 'none';
             });
-            // Clear search input
+            
+            filterOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Clear search input and hide clear button
             document.getElementById('eventTypeSearch').value = '';
+            document.getElementById('clearEventTypeSearch').style.display = 'none';
             // Hide suggestions
             hideSuggestions();
             // Show all event types
@@ -298,10 +341,12 @@
                 // Remove from selected
                 selectedEventTypes = selectedEventTypes.filter(type => type !== eventTypeName);
                 checkIcon.style.display = 'none';
+                element.classList.remove('selected');
             } else {
                 // Add to selected
                 selectedEventTypes.push(eventTypeName);
                 checkIcon.style.display = 'block';
+                element.classList.add('selected');
             }
         }
 
@@ -309,6 +354,14 @@
         function searchEventTypes() {
             const searchTerm = document.getElementById('eventTypeSearch').value.toLowerCase().trim();
             const suggestionsContainer = document.getElementById('searchSuggestions');
+            const clearButton = document.getElementById('clearEventTypeSearch');
+            
+            // Show/hide clear button
+            if (searchTerm.length > 0) {
+                clearButton.style.display = 'flex';
+            } else {
+                clearButton.style.display = 'none';
+            }
             
             if (searchTerm.length === 0) {
                 hideSuggestions();
@@ -327,6 +380,18 @@
 
             // Also filter the existing event type list
             filterExistingEventTypes(searchTerm);
+        }
+
+        // Clear search and suggestions
+        function clearSearchAndSuggestions() {
+            const searchInput = document.getElementById('eventTypeSearch');
+            const clearButton = document.getElementById('clearEventTypeSearch');
+            
+            searchInput.value = '';
+            clearButton.style.display = 'none';
+            hideSuggestions();
+            showAllEventTypes();
+            searchInput.focus();
         }
 
         // Show search suggestions
@@ -568,13 +633,14 @@
             if (savedEventTypes) {
                 selectedEventTypes = JSON.parse(savedEventTypes);
                 
-                // Show check marks for previously selected event types
+                // Show check marks and selected state for previously selected event types
                 selectedEventTypes.forEach(eventTypeName => {
                     const eventTypeOptions = document.querySelectorAll('.filter-option');
                     eventTypeOptions.forEach(option => {
                         const spanText = option.querySelector('span').textContent;
                         if (spanText === eventTypeName) {
                             option.querySelector('.check-icon').style.display = 'block';
+                            option.classList.add('selected');
                         }
                     });
                 });

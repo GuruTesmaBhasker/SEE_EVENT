@@ -69,14 +69,17 @@
         /* Desktop adjustments */
         @media (min-width: 1025px) {
             .text-2xl-responsive {
-                font-size: clamp(2rem, 3vw, 2.5rem);
+                font-size: 3rem; /* 48px - LARGE desktop title */
             }
             .text-base-responsive {
-                font-size: clamp(1rem, 2vw, 1.25rem);
+                font-size: 1.25rem; /* 20px - LARGE desktop description */
             }
             .illustration-responsive {
-                width: clamp(300px, 35vw, 400px);
-                height: clamp(300px, 35vw, 400px);
+                width: 400px; /* LARGE desktop illustration */
+                height: 400px;
+            }
+            .main-content {
+                padding: 4rem 2rem;
             }
         }
         .dot-indicator {

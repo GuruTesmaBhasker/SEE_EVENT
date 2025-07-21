@@ -15,54 +15,20 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       box-sizing: border-box;
       overflow: hidden;
     }
-    .phone-frame {
-      width: 375px;
-      height: 812px;
+
+    .main-container {
+      width: 100vw;
+      height: 100vh;
       background-color: #fff;
-      border-radius: 40px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      position: relative;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
-    .notch {
-      width: 150px;
-      height: 30px;
-      background-color: #000;
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-    }
-    .status-bar {
-      height: 44px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-      font-size: 12px;
-      color: #000;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 5;
-    }
-    .status-bar .time {
-      font-weight: 600;
-    }
-    .status-bar .icons {
-      display: flex;
-      gap: 5px;
-    }
+
     .input-field {
       width: 100%;
       padding: 12px 16px;
@@ -78,29 +44,105 @@
       border-color: #D66D4B;
       box-shadow: 0 0 0 2px rgba(214, 109, 75, 0.2);
     }
+
+    /* Responsive text sizing */
+    .text-4xl-responsive {
+      font-size: 2.25rem; /* Default mobile size */
+    }
+    .text-2xl-responsive {
+      font-size: 1.5rem; /* Default mobile size */
+    }
+    .text-sm-responsive {
+      font-size: 0.875rem; /* Default mobile size */
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 480px) {
+      .text-4xl-responsive {
+        font-size: 2.25rem; /* 36px - mobile size */
+      }
+      .text-2xl-responsive {
+        font-size: 1.5rem; /* 24px - mobile size */
+      }
+      .text-sm-responsive {
+        font-size: 0.875rem; /* 14px - mobile size */
+      }
+      .main-content {
+        padding: 2rem 1.5rem;
+      }
+      .input-field {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 14px 16px;
+      }
+    }
+
+    /* Tablet adjustments */
+    @media (min-width: 481px) and (max-width: 1024px) {
+      .text-4xl-responsive {
+        font-size: 3.5rem; /* 56px - tablet size */
+      }
+      .text-2xl-responsive {
+        font-size: 2.25rem; /* 36px - tablet size */
+      }
+      .main-content {
+        padding: 3rem 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .input-field {
+        font-size: 18px;
+        padding: 16px 20px;
+      }
+    }
+
+    /* Desktop adjustments */
+    @media (min-width: 1025px) {
+      .text-4xl-responsive {
+        font-size: 5rem; /* 80px - LARGE desktop size */
+      }
+      .text-2xl-responsive {
+        font-size: 3rem; /* 48px - LARGE desktop size */
+      }
+      .text-sm-responsive {
+        font-size: 1.125rem; /* 18px - desktop size */
+      }
+      .main-content {
+        padding: 5rem 4rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .input-field {
+        font-size: 20px;
+        padding: 20px 24px;
+      }
+      label {
+        font-size: 18px !important;
+      }
+      .text-gray-600 {
+        font-size: 18px !important;
+      }
+      button {
+        font-size: 20px !important;
+        padding: 18px 24px !important;
+      }
+      a {
+        font-size: 18px !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="phone-frame">
-    <div class="notch"></div>
-    <div class="status-bar">
-      <span class="time">9:41</span>
-      <div class="icons">
-        <span>📶</span>
-        <span>🔋</span>
-      </div>
-    </div>
-
+  <div class="main-container">
     <!-- Login Content -->
-    <div class="flex flex-col justify-between h-full w-full p-8 pt-20">
+    <div class="flex flex-col justify-center h-full w-full main-content">
       <div>
         <!-- Header -->
         <div class="flex items-center mb-10 justify-center">
-          <h1 class="text-4xl font-extrabold text-[#D66D4B]">SEE</h1>
-          <h1 class="text-4xl font-extrabold ml-2 text-[#3B3B3B]">EVENT</h1>
+          <h1 class="text-4xl-responsive font-extrabold text-[#D66D4B]">SEE</h1>
+          <h1 class="text-4xl-responsive font-extrabold ml-2 text-[#3B3B3B]">EVENT</h1>
         </div>
 
-        <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Welcome Back!</h2>
+        <h2 class="text-2xl-responsive font-bold text-gray-800 mb-8 text-center">Welcome Back!</h2>
 
         <!-- Email -->
         <div class="mb-6">
@@ -116,7 +158,7 @@
 
         <!-- Forgot Password -->
         <div class="flex justify-end mb-8">
-          <a href="#" onclick="goToForgotPassword()" class="text-sm font-medium text-[#D66D4B] hover:underline">Forgot Password?</a>
+          <a href="#" onclick="goToForgotPassword()" class="text-sm-responsive font-medium text-[#D66D4B] hover:underline">Forgot Password?</a>
         </div>
 
         <!-- Login Button -->

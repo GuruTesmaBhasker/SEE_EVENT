@@ -15,19 +15,40 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
             overflow: hidden;
         }
-        .phone-frame {
-            width: 375px; /* Standard mobile width */
-            height: 812px; /* Standard mobile height */
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
             background-color: #fff;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
             display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 3rem 4rem;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            button {
+                font-size: 18px !important;
+                padding: 16px 24px !important;
+            }
+            input {
+                font-size: 18px !important;
+                padding: 16px 20px !important;
+            }
+        }
+    </style>
             flex-direction: column;
         }
         .notch {
@@ -40,43 +61,13 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 10;
         }
-        .status-bar {
-            height: 44px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 12px;
-            color: #000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 5;
-        }
-        .status-bar .time {
-            font-weight: 600;
-        }
-        .status-bar .icons {
-            display: flex;
-            gap: 5px;
-        }
-        .event-card {
-            background-color: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
-            transition: transform 0.2s ease-in-out;
-        }
-        .event-card:hover {
-            transform: translateY(-5px);
-        }
-        .event-image {
-            width: 100%;
-            height: 160px;
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="main-container">
+        <!-- Search Bar Content -->
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
             object-fit: cover;
         }
         .event-details {
