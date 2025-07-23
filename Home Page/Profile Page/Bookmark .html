@@ -29,6 +29,39 @@
             position: relative;
         }
 
+        /* Responsive text sizing */
+        .text-2xl-responsive {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+        }
+        .text-base-responsive {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .text-2xl-responsive {
+                font-size: clamp(1.25rem, 6vw, 1.75rem);
+            }
+            .text-base-responsive {
+                font-size: clamp(0.85rem, 4vw, 0.95rem);
+            }
+            .main-content {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .text-2xl-responsive {
+                font-size: clamp(1.75rem, 4vw, 2.25rem);
+            }
+            .main-content {
+                padding: 2rem 3rem;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+        }
+
         /* Desktop adjustments */
         @media (min-width: 1025px) {
             .text-2xl-responsive {
@@ -43,42 +76,6 @@
                 font-size: 18px !important;
                 padding: 16px 24px !important;
             }
-        }
-    </style>
-            flex-direction: column;
-        }
-        .notch {
-            width: 150px;
-            height: 30px;
-            background-color: #000;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-        .status-bar {
-            height: 44px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 12px;
-            color: #000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 5;
-        }
-        .status-bar .time {
-            font-weight: 600;
-        }
-        .status-bar .icons {
-            display: flex;
-            gap: 5px;
         }
         .event-card {
             background-color: #fff;
@@ -134,33 +131,24 @@
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
-    <div class="phone-frame">
-        <div class="notch"></div>
-        <div class="status-bar">
-            <span class="time">9:41</span>
-            <div class="icons">
-                <span>📶</span>
-                <span>🔋</span>
-            </div>
-        </div>
-
+    <div class="main-container">
         <!-- Bookmarks / Saved Events Content -->
-        <div class="flex flex-col flex-grow overflow-y-auto p-6">
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
             <!-- Header -->
-            <div class="flex items-center justify-between mb-6">
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Back to Profile Page');">
+            <div class="flex items-center justify-between p-6 pb-4">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToProfile()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h1 class="text-2xl font-bold text-gray-800">Saved Events</h1>
-                <div class="w-6"></div> <!-- Placeholder for alignment -->
+                <h1 class="text-2xl-responsive font-bold text-gray-800">Saved Events</h1>
+                <div class="w-10"></div>
             </div>
 
             <!-- Saved Event List -->
-            <div class="flex-grow overflow-y-auto pr-2 -mr-2">
+            <div class="px-6 pb-6 flex-grow overflow-y-auto">
                 <!-- Saved Event Card 1 -->
-                <div class="event-card" onclick="console.log('Navigating to Event Details for Saved Event 1');">
+                <div class="event-card" onclick="goToEventDetails(1)">
                     <img src="https://placehold.co/600x200/F5E7E2/D66D4B?text=Web+Dev+Workshop" alt="Event Banner" class="event-image">
                     <div class="event-details">
                         <h3 class="event-title">Web Development Workshop</h3>
@@ -177,14 +165,14 @@
                             Central University
                         </p>
                         <div class="flex justify-end space-x-2 mt-4">
-                            <button class="action-button bg-gray-500 hover:bg-gray-700" onclick="event.stopPropagation(); console.log('Remove Bookmark 1');">Remove</button>
-                            <button class="action-button" onclick="event.stopPropagation(); console.log('Register for Saved Event 1');">Register</button>
+                            <button class="action-button bg-gray-500 hover:bg-gray-700" onclick="event.stopPropagation(); removeBookmark(1)">Remove</button>
+                            <button class="action-button" onclick="event.stopPropagation(); registerForEvent(1)">Register</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Saved Event Card 2 -->
-                <div class="event-card" onclick="console.log('Navigating to Event Details for Saved Event 2');">
+                <div class="event-card" onclick="goToEventDetails(2)">>>
                     <img src="https://placehold.co/600x200/F5E7E2/D66D4B?text=AI+Summit" alt="Event Banner" class="event-image">
                     <div class="event-details">
                         <h3 class="event-title">Annual AI Summit</h3>
@@ -201,13 +189,51 @@
                             Global Tech University
                         </p>
                         <div class="flex justify-end space-x-2 mt-4">
-                            <button class="action-button bg-gray-500 hover:bg-gray-700" onclick="event.stopPropagation(); console.log('Remove Bookmark 2');">Remove</button>
-                            <button class="action-button" onclick="event.stopPropagation(); console.log('Register for Saved Event 2');">Register</button>
+                            <button class="action-button bg-gray-500 hover:bg-gray-700" onclick="event.stopPropagation(); removeBookmark(2)">Remove</button>
+                            <button class="action-button" onclick="event.stopPropagation(); registerForEvent(2)">Register</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Bookmark functionality -->
+    <script>
+        // Go back to Profile Page
+        function goBackToProfile() {
+            window.location.href = 'Profile Page.html';
+        }
+
+        // Remove bookmark
+        function removeBookmark(eventId) {
+            if (confirm('Are you sure you want to remove this event from your bookmarks?')) {
+                // In a real app, this would make an API call to remove the bookmark
+                alert(`Event ${eventId} removed from bookmarks!`);
+                
+                // Here you could remove the event card from the DOM
+                // For demo purposes, we'll just show the confirmation
+            }
+        }
+
+        // Register for event
+        function registerForEvent(eventId) {
+            alert(`Redirecting to registration for Event ${eventId}...`);
+            // In a real app, this would navigate to the registration page
+            // window.location.href = '../Register button.html?eventId=' + eventId;
+        }
+
+        // Navigate to event details
+        function goToEventDetails(eventId) {
+            alert(`Viewing details for Event ${eventId}...`);
+            // In a real app, this would navigate to event details page
+        }
+
+        // Load saved events from localStorage
+        window.addEventListener('load', function() {
+            // In a real app, this would load bookmarked events from server/localStorage
+            console.log('Loading saved events...');
+        });
+    </script>
 </body>
 </html>

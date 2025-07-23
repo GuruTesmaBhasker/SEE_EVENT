@@ -29,6 +29,44 @@
             position: relative;
         }
 
+        /* Responsive text and input sizing */
+        .text-2xl-responsive {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+        }
+        .text-base-responsive {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .text-2xl-responsive {
+                font-size: clamp(1.25rem, 6vw, 1.75rem);
+            }
+            .text-base-responsive {
+                font-size: clamp(0.85rem, 4vw, 0.95rem);
+            }
+            .input-field {
+                font-size: 14px !important;
+                padding: 10px 12px !important;
+            }
+            .save-button {
+                font-size: 14px !important;
+                padding: 12px 16px !important;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .text-2xl-responsive {
+                font-size: clamp(1.75rem, 4vw, 2.25rem);
+            }
+            .main-content {
+                padding: 2rem 3rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
         /* Desktop adjustments */
         @media (min-width: 1025px) {
             .text-2xl-responsive {
@@ -43,54 +81,47 @@
                 font-size: 18px !important;
                 padding: 16px 24px !important;
             }
-            input {
+            input, textarea {
                 font-size: 18px !important;
                 padding: 16px 20px !important;
             }
             label {
                 font-size: 18px !important;
             }
+            .save-button {
+                font-size: 20px !important;
+                padding: 18px 24px !important;
+            }
         }
-    </style>
-            font-size: 12px;
-            color: #000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 5;
-        }
-        .status-bar .time {
-            font-weight: 600;
-        }
-        .status-bar .icons {
-            display: flex;
-            gap: 5px;
-        }
+
         .input-field {
             width: 100%;
             padding: 12px 16px;
-            border: 1px solid #E2E8F0;
+            border: 2px solid #E5E7EB;
             border-radius: 12px;
             font-size: 16px;
             color: #3B3B3B;
-            background-color: #F8FAFC;
+            background-color: #F9FAFB;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
         .input-field:focus {
             outline: none;
             border-color: #D66D4B;
             box-shadow: 0 0 0 2px rgba(214, 109, 75, 0.2);
+            background-color: #FFFFFF;
         }
         .save-button {
             background-color: #D66D4B;
             color: #fff;
-            padding: 12px 20px;
+            padding: 16px 20px;
             border-radius: 16px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out;
+            width: 100%;
+            border: none;
+            font-size: 16px;
         }
         .save-button:hover {
             background-color: #C06040;
@@ -98,27 +129,18 @@
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
-    <div class="phone-frame">
-        <div class="notch"></div>
-        <div class="status-bar">
-            <span class="time">9:41</span>
-            <div class="icons">
-                <span>📶</span>
-                <span>🔋</span>
-            </div>
-        </div>
-
+    <div class="main-container">
         <!-- Edit Profile Content -->
-        <div class="flex flex-col flex-grow overflow-y-auto p-6">
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
             <!-- Header -->
-            <div class="flex items-center justify-between mb-6">
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Back to Profile Page');">
+            <div class="flex items-center justify-between p-6 pb-4">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToProfile()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h1 class="text-2xl font-bold text-gray-800">Edit Profile</h1>
-                <div class="w-6"></div> <!-- Placeholder for alignment -->
+                <h1 class="text-2xl-responsive font-bold text-gray-800">Edit Profile</h1>
+                <div class="w-10"></div> <!-- Placeholder for alignment -->
             </div>
 
             <!-- Profile Picture Section -->
@@ -136,7 +158,7 @@
             </div>
 
             <!-- Profile Details Form -->
-            <div class="flex-grow">
+            <div class="px-6 pb-6 flex-grow">
                 <div class="mb-4">
                     <label for="full-name" class="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
                     <input type="text" id="full-name" value="John Doe" class="input-field">
@@ -165,12 +187,105 @@
             </div>
 
             <!-- Save Changes Button -->
-            <div class="sticky bottom-0 w-full p-6 bg-white shadow-lg rounded-t-2xl">
-                <button class="w-full save-button" onclick="console.log('Profile Changes Saved');">
+            <div class="sticky bottom-0 p-6 bg-white shadow-lg rounded-t-2xl">
+                <button class="save-button" onclick="saveProfileChanges()">
                     Save Changes
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Edit Profile functionality -->
+    <script>
+        // Go back to Profile Page
+        function goBackToProfile() {
+            window.location.href = 'Profile Page.html';
+        }
+
+        // Save profile changes
+        function saveProfileChanges() {
+            // Get form data
+            const profileData = {
+                fullName: document.getElementById('full-name').value,
+                email: document.getElementById('email-address').value,
+                collegeName: document.getElementById('college-name').value,
+                bio: document.getElementById('bio').value,
+                phoneNumber: document.getElementById('phone-number').value,
+                lastUpdated: new Date().toISOString()
+            };
+
+            // Validate required fields
+            if (!profileData.fullName.trim()) {
+                alert('Please enter your full name');
+                document.getElementById('full-name').focus();
+                return;
+            }
+
+            if (!profileData.collegeName.trim()) {
+                alert('Please enter your college name');
+                document.getElementById('college-name').focus();
+                return;
+            }
+
+            // Save to localStorage (in a real app, this would be saved to a server)
+            localStorage.setItem('userProfile', JSON.stringify(profileData));
+
+            // Show success message
+            alert('Profile updated successfully! 🎉');
+
+            // Optional: Go back to profile page
+            setTimeout(() => {
+                goBackToProfile();
+            }, 1000);
+        }
+
+        // Load existing profile data when page loads
+        window.addEventListener('load', function() {
+            const savedProfile = localStorage.getItem('userProfile');
+            if (savedProfile) {
+                const profileData = JSON.parse(savedProfile);
+                
+                // Populate form with saved data
+                if (profileData.fullName) {
+                    document.getElementById('full-name').value = profileData.fullName;
+                }
+                if (profileData.collegeName) {
+                    document.getElementById('college-name').value = profileData.collegeName;
+                }
+                if (profileData.bio) {
+                    document.getElementById('bio').value = profileData.bio;
+                }
+                if (profileData.phoneNumber) {
+                    document.getElementById('phone-number').value = profileData.phoneNumber;
+                }
+            }
+        });
+
+        // Add real-time validation and formatting
+        document.getElementById('phone-number').addEventListener('input', function(e) {
+            // Remove non-digit characters
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // Limit to 10 digits
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            // Format as per Indian mobile number pattern
+            if (value.length >= 6) {
+                value = value.replace(/(\d{5})(\d{1,5})/, '$1 $2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Character limit for bio
+        document.getElementById('bio').addEventListener('input', function(e) {
+            const maxLength = 150;
+            if (e.target.value.length > maxLength) {
+                e.target.value = e.target.value.substring(0, maxLength);
+            }
+        });
+    </script>
 </body>
 </html>

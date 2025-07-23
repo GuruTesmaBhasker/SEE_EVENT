@@ -133,13 +133,13 @@
         <div class="flex flex-col h-full w-full main-content overflow-y-auto">
             <!-- Header -->
             <div class="flex items-center justify-between mb-6">
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToHome()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <h1 class="text-2xl-responsive font-bold text-gray-800">Profile</h1>
-                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="navigateToPage('Edit Page.html')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
@@ -156,7 +156,7 @@
 
             <!-- Profile Options -->
             <div class="flex-grow">
-                <a href="#" class="profile-option">
+                <a href="Edit Page.html" class="profile-option" onclick="navigateToPage('Edit Page.html')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-3-3H8a3 3 0 00-3 3v2h5M12 9a4 4 0 100-8 4 4 0 000 8z" />
                     </svg>
@@ -165,7 +165,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
-                <a href="#" class="profile-option">
+                <a href="My Event.html" class="profile-option" onclick="navigateToPage('My Event.html')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -174,7 +174,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
-                <a href="#" class="profile-option">
+                <a href="Bookmark .html" class="profile-option" onclick="navigateToPage('Bookmark .html')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                     </svg>
@@ -183,7 +183,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
-                <a href="#" class="profile-option">
+                <a href="Feedback .html" class="profile-option" onclick="navigateToPage('Feedback .html')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
@@ -192,7 +192,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
-                <a href="#" class="profile-option">
+                <a href="#" class="profile-option" onclick="showAboutUs()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -201,7 +201,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                 </a>
-                <a href="#" class="profile-option">
+                <a href="Terms and conditions .html" class="profile-option" onclick="navigateToPage('Terms and conditions .html')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -214,11 +214,83 @@
 
             <!-- Logout Button -->
             <div class="mt-8 mb-4">
-                <button class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
+                <button class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;" onclick="handleLogout()">
                     Logout
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for Navigation -->
+    <script>
+        // Navigate to different pages
+        function navigateToPage(pageName) {
+            try {
+                window.location.href = pageName;
+            } catch (error) {
+                console.error('Navigation error:', error);
+                alert('Unable to navigate to ' + pageName);
+            }
+        }
+
+        // Go back to home page
+        function goBackToHome() {
+            window.location.href = '../Home page.html';
+        }
+
+        // Handle logout functionality
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear any stored user data
+                localStorage.removeItem('userProfile');
+                localStorage.removeItem('userPreferences');
+                
+                // Show logout message
+                alert('You have been logged out successfully!');
+                
+                // Redirect to login page
+                window.location.href = '../../Login page/Login Page.html';
+            }
+        }
+
+        // Show About Us information
+        function showAboutUs() {
+            const aboutMessage = `
+About SEE EVENT
+
+SEE EVENT is your gateway to discovering exciting college events and activities. 
+
+🎯 Our Mission: Connect students with amazing opportunities and experiences.
+
+🌟 Features:
+• Discover events across multiple colleges
+• Easy registration and booking
+• Personalized recommendations
+• Event reminders and notifications
+
+📱 Version: 1.0.0
+👥 Developed for college students, by students
+
+For support or feedback, contact us through the Feedback section.
+            `;
+            
+            alert(aboutMessage);
+        }
+
+        // Add click effects to profile options
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileOptions = document.querySelectorAll('.profile-option');
+            
+            profileOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-2px)';
+                    }, 100);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
