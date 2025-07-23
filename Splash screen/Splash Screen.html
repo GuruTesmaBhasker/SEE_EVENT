@@ -7,30 +7,110 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Apply Poppins font to the entire body */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #FAF9F6; /* Consistent background color */
+            background-color: #FAF9F6; /* Base background color */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Full viewport height */
+            min-height: 100vh;
             margin: 0;
-            padding: 0; /* Remove padding for full-screen experience */
-            box-sizing: border-box; /* Include padding in element's total width and height */
-            overflow: hidden; /* Prevent scrolling if content slightly overflows */
+            padding: 0;
+            overflow: hidden; /* Hide overflow from positioned elements */
+            position: relative; /* For positioning child elements */
         }
 
-        .main-container {
-            width: 100vw;
-            height: 100vh;
-            background-color: #FAF9F6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Ensures background elements are behind content */
         }
+
+        .background-svg {
+            position: absolute;
+            fill: none;
+            stroke: #D66D4B; /* "SEE" color */
+            stroke-width: 2; /* Adjust stroke width for wavy lines */
+            opacity: 0.1; /* Subtle opacity */
+            pointer-events: none; /* Ensure it doesn't interfere with interactions */
+        }
+
+        /* Specific positioning and sizing for background elements */
+        .wavy-lines-1 {
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            transform: rotate(5deg);
+        }
+        .wavy-lines-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 120%;
+            height: 120%;
+            transform: rotate(-10deg);
+        }
+
+        /* Academic illustrations */
+        .illustration-svg {
+            position: absolute;
+            color: #D66D4B; /* "SEE" color */
+            opacity: 0.15; /* Slightly more visible than background patterns */
+            pointer-events: none;
+        }
+
+        .calendar {
+            top: 10%;
+            left: 8%;
+            width: 120px;
+            height: 120px;
+            transform: rotate(15deg);
+        }
+        
+        .lightbulb {
+            top: 15%;
+            right: 10%;
+            width: 105px;
+            height: 105px;
+            transform: rotate(-20deg);
+        }
+        
+        .laptop {
+            top: 45%;
+            left: 5%;
+            width: 135px;
+            height: 135px;
+            transform: rotate(25deg);
+        }
+        
+        .trophy {
+            top: 50%;
+            right: 8%;
+            width: 128px;
+            height: 128px;
+            transform: rotate(-15deg);
+        }
+        
+        .book {
+            bottom: 3%;
+            left: 12%;
+            width: 150px;
+            height: 150px;
+            transform: rotate(20deg);
+        }
+        
+        .bell {
+            bottom: 10%;
+            right: 15%;
+            width: 98px;
+            height: 98px;
+            transform: rotate(-25deg);
+        }
+
         /* Custom spinner for visual representation of a loader */
         .loader {
             border: 4px solid rgba(255, 255, 255, 0.3); /* Light grey border for the loader track */
@@ -46,16 +126,12 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive text and logo sizing */
+        /* Responsive text sizing */
         .text-6xl-responsive {
             font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive title size */
         }
         .text-lg-responsive {
             font-size: clamp(0.9rem, 3vw, 1.25rem); /* Responsive tagline size */
-        }
-        .logo-size-responsive {
-            width: clamp(60px, 20vw, 120px); /* Responsive logo size */
-            height: clamp(60px, 20vw, 120px);
         }
 
         /* Mobile-specific adjustments */
@@ -66,25 +142,12 @@
             .text-lg-responsive {
                 font-size: clamp(0.9rem, 4vw, 1.1rem);
             }
-            .logo-size-responsive {
-                width: clamp(70px, 25vw, 100px);
-                height: clamp(70px, 25vw, 100px);
-            }
-            
-            /* Adjust spacing for mobile */
-            .main-content {
-                padding: 2rem 1rem;
-            }
         }
 
         /* Tablet adjustments */
         @media (min-width: 481px) and (max-width: 1024px) {
             .text-6xl-responsive {
                 font-size: clamp(2.8rem, 6vw, 3.5rem);
-            }
-            .logo-size-responsive {
-                width: clamp(80px, 15vw, 110px);
-                height: clamp(80px, 15vw, 110px);
             }
         }
 
@@ -96,24 +159,86 @@
             .text-lg-responsive {
                 font-size: 1.5rem; /* 24px - LARGE desktop tagline */
             }
-            .logo-size-responsive {
-                width: 160px; /* LARGE desktop logo */
-                height: 160px;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <!-- Main container for the splash screen content -->
-        <div class="flex flex-col items-center justify-center h-full w-full p-4 main-content">
-            <!-- App Logo (Placeholder Image) -->
-            <img
-                src="https://placehold.co/120x120/E2E8F0/A0AEC0?text=Logo"
-                alt="App Logo"
-                class="logo-size-responsive rounded-3xl mb-8"
-            />
+    <div class="background-container">
+        <!-- Abstract Wavy Lines 1 -->
+        <svg class="background-svg wavy-lines-1" viewBox="0 0 1000 1000">
+            <path d="M0 100 C 200 300, 400 -100, 600 300 S 800 -100, 1000 100" />
+            <path d="M0 300 C 200 500, 400 100, 600 500 S 800 100, 1000 300" />
+            <path d="M0 500 C 200 700, 400 300, 600 700 S 800 300, 1000 500" />
+        </svg>
 
+        <!-- Abstract Wavy Lines 2 -->
+        <svg class="background-svg wavy-lines-2" viewBox="0 0 1000 1000">
+            <path d="M0 100 C 200 300, 400 -100, 600 300 S 800 -100, 1000 100" />
+            <path d="M0 300 C 200 500, 400 100, 600 500 S 800 100, 1000 300" />
+            <path d="M0 500 C 200 700, 400 300, 600 700 S 800 300, 1000 500" />
+        </svg>
+
+        <!-- Academic Illustrations -->
+        <!-- Calendar -->
+        <svg class="illustration-svg calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+            <path d="m9 16 2 2 4-4"></path>
+        </svg>
+
+        <!-- Light Bulb (Ideas) -->
+        <svg class="illustration-svg lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21h6"></path>
+            <path d="M12 17h.01"></path>
+            <path d="M8 17h8"></path>
+            <path d="M12 3a4 4 0 0 1 4 4c0 1.5-.5 2.5-1 3.5-.5 1-1 2-1 3.5H10c0-1.5-.5-2.5-1-3.5-.5-1-1-2-1-3.5a4 4 0 0 1 4-4z"></path>
+        </svg>
+
+        <!-- Laptop -->
+        <svg class="illustration-svg laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="2" y1="17" x2="22" y2="17"></line>
+            <line x1="6" y1="21" x2="18" y2="21"></line>
+        </svg>
+
+        <!-- Trophy -->
+        <svg class="illustration-svg trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-2.34"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+        </svg>
+
+        <!-- Book with Text -->
+        <div class="illustration-svg book" style="display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                <path d="M12 7v14"></path>
+                <!-- Wavy text lines on left page -->
+                <path d="M3 9 Q 4.5 8.5, 6 9.2 Q 7.5 9.8, 9 8.9" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <path d="M3 11 Q 4 10.4, 5.5 11.3 Q 7.5 12, 10 10.7" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <path d="M3 13 Q 4.5 12.3, 6 13.4 Q 7 13.8, 8 12.8" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <path d="M3 15 Q 5 14.4, 6.5 15.5 Q 8 15.8, 9.5 14.9" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <!-- Wavy text lines on right page -->
+                <path d="M15 9 Q 16.5 8.4, 18 9.3 Q 19.5 9.9, 21 8.8" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <path d="M15 11 Q 16 10.3, 17.5 11.4 Q 19 11.8, 20 10.6" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <path d="M15 13 Q 17 12.2, 18.5 13.5 Q 20 13.9, 21.5 12.7" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+                <path d="M15 15 Q 16.5 14.3, 17.5 15.4 Q 18.5 15.7, 19.5 14.8" stroke="currentColor" stroke-width="0.3" fill="none"></path>
+            </svg>
+        </div>
+
+        <!-- Bell -->
+        <svg class="illustration-svg bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+            <path d="m13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+
+        <!-- Main splash screen content -->
+        <div class="relative z-10 flex flex-col items-center justify-center w-full h-full p-4">
             <!-- App Name ("SeeEvent") with color split -->
             <div class="flex items-center mb-4">
                 <h1 class="text-6xl-responsive font-extrabold" style="color: #D66D4B;">SEE</h1>
@@ -132,10 +257,10 @@
 
     <!-- JavaScript for navigation -->
     <script>
-        // Auto-redirect after 2 seconds
+        // Auto-redirect after 3 seconds
         setTimeout(function() {
             window.location.href = "../On Boarding/On boarding 1.html";
-        }, 2000); // 2 seconds delay
+        }, 3000); // 3 seconds delay
     </script>
 </body>
 </html>
