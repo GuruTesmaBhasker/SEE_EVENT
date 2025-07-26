@@ -323,7 +323,7 @@
         }
 
         function goBackToHome() {
-            window.location.href = 'Home page.html';
+            window.location.href = 'home.html';
         }
 
         function bookmarkEvent() {
@@ -362,7 +362,7 @@
         function registerForCurrentEvent() {
             // Store current event data for registration page
             localStorage.setItem('currentEventForRegistration', JSON.stringify(currentEventData));
-            window.location.href = 'Register button.html?event=' + encodeURIComponent(currentEventData.title);
+            window.location.href = 'register.html?event=' + encodeURIComponent(currentEventData.title);
         }
     </script>
 </body>

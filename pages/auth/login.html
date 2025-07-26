@@ -3,9 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SEE EVENT Login Page</title>
+  <meta name="description" content="Login to SEE EVENT - Your professional event management platform. Discover, create, and manage events easily.">
+  <meta name="keywords" content="event management, login, events, booking, registration">
+  <meta name="author" content="GuruTesmaBhasker">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://see-event.app/">
+  <meta property="og:title" content="SEE EVENT - Login">
+  <meta property="og:description" content="Professional event management platform">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="SEE EVENT - Login">
+  <meta property="twitter:description" content="Professional event management platform">
+  
+  <title>Login - SEE EVENT | Professional Event Management</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <script src="../../assets/js/common.js" defer></script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -179,11 +196,11 @@
   <!-- JS Logic -->
   <script>
     function goToSignup() {
-      window.location.href = 'Sign Up .html'; // Corrected path with space in filename
+      window.location.href = 'signup.html'; // Navigate to signup page
     }
 
     function goToForgotPassword() {
-      window.location.href = 'Forget password.html'; // Navigate to forgot password page
+      window.location.href = 'forgot-password.html'; // Navigate to forgot password page
     }
 
     function handleLogin() {
@@ -201,7 +218,7 @@
       if (email && password) {
         alert('Login successful! Welcome back!');
         // Redirect to home page after successful login
-        window.location.href = '../Home Page/Home page.html';
+        window.location.href = '../home/home.html';
       }
     }
   </script>

@@ -3,43 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEE EVENT Splash Screen</title>
+    <title>SEE EVENT - Your Gateway to College Events</title>
+    
+    <!-- External Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #FAF9F6; /* Base background color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Hide overflow from positioned elements */
-            position: relative; /* For positioning child elements */
-        }
-
-        .background-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0; /* Ensures background elements are behind content */
-        }
-
+        /* Splash screen specific styles */
         .background-svg {
             position: absolute;
             fill: none;
-            stroke: #D66D4B; /* "SEE" color */
-            stroke-width: 2; /* Adjust stroke width for wavy lines */
-            opacity: 0.1; /* Subtle opacity */
-            pointer-events: none; /* Ensure it doesn't interfere with interactions */
+            stroke: #D66D4B;
+            stroke-width: 2;
+            opacity: 0.1;
+            pointer-events: none;
         }
 
-        /* Specific positioning and sizing for background elements */
         .wavy-lines-1 {
             top: -10%;
             left: -10%;
@@ -47,6 +30,7 @@
             height: 120%;
             transform: rotate(5deg);
         }
+        
         .wavy-lines-2 {
             bottom: -10%;
             right: -10%;
@@ -55,11 +39,10 @@
             transform: rotate(-10deg);
         }
 
-        /* Academic illustrations */
         .illustration-svg {
             position: absolute;
-            color: #D66D4B; /* "SEE" color */
-            opacity: 0.15; /* Slightly more visible than background patterns */
+            color: #D66D4B;
+            opacity: 0.15;
             pointer-events: none;
         }
 
@@ -111,54 +94,17 @@
             transform: rotate(-25deg);
         }
 
-        /* Custom spinner for visual representation of a loader */
         .loader {
-            border: 4px solid rgba(255, 255, 255, 0.3); /* Light grey border for the loader track */
-            border-top: 4px solid #D66D4B; /* Accent color for the spinning part */
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #D66D4B;
             border-radius: 50%;
             width: 40px;
             height: 40px;
             animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive text sizing */
         .text-6xl-responsive {
-            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive title size */
-        }
-        .text-lg-responsive {
-            font-size: clamp(0.9rem, 3vw, 1.25rem); /* Responsive tagline size */
-        }
-
-        /* Mobile-specific adjustments */
-        @media (max-width: 480px) {
-            .text-6xl-responsive {
-                font-size: clamp(2rem, 12vw, 3rem);
-            }
-            .text-lg-responsive {
-                font-size: clamp(0.9rem, 4vw, 1.1rem);
-            }
-        }
-
-        /* Tablet adjustments */
-        @media (min-width: 481px) and (max-width: 1024px) {
-            .text-6xl-responsive {
-                font-size: clamp(2.8rem, 6vw, 3.5rem);
-            }
-        }
-
-        /* Desktop adjustments */
-        @media (min-width: 1025px) {
-            .text-6xl-responsive {
-                font-size: 5rem; /* 80px - LARGE desktop size */
-            }
-            .text-lg-responsive {
-                font-size: 1.5rem; /* 24px - LARGE desktop tagline */
-            }
+            font-size: clamp(2.5rem, 8vw, 4rem);
         }
     </style>
 </head>
@@ -188,7 +134,7 @@
             <path d="m9 16 2 2 4-4"></path>
         </svg>
 
-        <!-- Light Bulb (Ideas) -->
+        <!-- Light Bulb -->
         <svg class="illustration-svg lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21h6"></path>
             <path d="M12 17h.01"></path>
@@ -212,18 +158,16 @@
             <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
         </svg>
 
-        <!-- Book with Text -->
+        <!-- Book -->
         <div class="illustration-svg book" style="display: flex; align-items: center; justify-content: center;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                 <path d="M12 7v14"></path>
-                <!-- Wavy text lines on left page -->
                 <path d="M3 9 Q 4.5 8.5, 6 9.2 Q 7.5 9.8, 9 8.9" stroke="currentColor" stroke-width="0.3" fill="none"></path>
                 <path d="M3 11 Q 4 10.4, 5.5 11.3 Q 7.5 12, 10 10.7" stroke="currentColor" stroke-width="0.3" fill="none"></path>
                 <path d="M3 13 Q 4.5 12.3, 6 13.4 Q 7 13.8, 8 12.8" stroke="currentColor" stroke-width="0.3" fill="none"></path>
                 <path d="M3 15 Q 5 14.4, 6.5 15.5 Q 8 15.8, 9.5 14.9" stroke="currentColor" stroke-width="0.3" fill="none"></path>
-                <!-- Wavy text lines on right page -->
                 <path d="M15 9 Q 16.5 8.4, 18 9.3 Q 19.5 9.9, 21 8.8" stroke="currentColor" stroke-width="0.3" fill="none"></path>
                 <path d="M15 11 Q 16 10.3, 17.5 11.4 Q 19 11.8, 20 10.6" stroke="currentColor" stroke-width="0.3" fill="none"></path>
                 <path d="M15 13 Q 17 12.2, 18.5 13.5 Q 20 13.9, 21.5 12.7" stroke="currentColor" stroke-width="0.3" fill="none"></path>
@@ -239,28 +183,30 @@
 
         <!-- Main splash screen content -->
         <div class="relative z-10 flex flex-col items-center justify-center w-full h-full p-4">
-            <!-- App Name ("SeeEvent") with color split -->
+            <!-- App Name -->
             <div class="flex items-center mb-4">
                 <h1 class="text-6xl-responsive font-extrabold" style="color: #D66D4B;">SEE</h1>
                 <h1 class="text-6xl-responsive font-extrabold ml-2" style="color: #3b3b3b;">EVENT</h1>
             </div>
 
-            <!-- Short tagline -->
+            <!-- Tagline -->
             <p class="text-lg-responsive text-gray-600 px-4 mb-12 text-center">
                 Your Gateway to College Events
             </p>
 
-            <!-- Loader or Progress Bar -->
+            <!-- Loader -->
             <div class="loader"></div>
         </div>
     </div>
 
-    <!-- JavaScript for navigation -->
+    <!-- Global JavaScript -->
+    <script src="assets/js/main.js"></script>
+    
     <script>
         // Auto-redirect after 3 seconds
         setTimeout(function() {
-            window.location.href = "../On Boarding/On boarding 1.html";
-        }, 3000); // 3 seconds delay
+            navigateToPage("pages/onboarding/onboarding-1.html");
+        }, 3000);
     </script>
 </body>
 </html>

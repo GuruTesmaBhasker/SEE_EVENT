@@ -168,7 +168,7 @@
     </div>
     <script type="module">
         // Import Firebase functions
-        import { auth, db } from "../firebase.js";
+        import { auth, db } from "../../firebase.js";
         import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
         import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -225,7 +225,7 @@
                 alert("Account created successfully! Welcome to SEE EVENT!");
                 
                 // Redirect to home page
-                window.location.href = "../Home Page/Home page.html";
+                window.location.href = "../home/home.html";
                 
             } catch (error) {
                 console.error("Error creating account:", error);
@@ -256,7 +256,7 @@
         // Add event listener to the Login link
         document.querySelector("a[href='#']").addEventListener("click", function(e) {
             e.preventDefault();
-            window.location.href = "Login Page.html";
+            window.location.href = "login.html";
         });
     </script>
 </body>

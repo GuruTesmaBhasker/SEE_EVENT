@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEE EVENT Onboarding 3</title>
+    <title>SEE EVENT Onboarding 1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -81,20 +81,16 @@
             .main-content {
                 padding: 4rem 2rem;
             }
-            button {
-                font-size: 20px !important;
-                padding: 18px 32px !important;
-            }
         }
         .dot-indicator {
             width: 8px;
             height: 8px;
-            background-color: #E2E8F0;
+            background-color: #E2E8F0; /* Light gray */
             border-radius: 50%;
             margin: 0 4px;
         }
         .dot-indicator.active {
-            background-color: #D66D4B;
+            background-color: #D66D4B; /* Accent color */
         }
     </style>
 </head>
@@ -103,22 +99,22 @@
         <!-- Onboarding Content -->
         <div class="flex flex-col items-center justify-between h-full w-full p-8 pt-20">
             <div class="flex flex-col items-center flex-grow justify-center">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Event Organization and Management" class="illustration-responsive rounded-xl mb-8 object-cover">
-                <h2 class="text-2xl-responsive font-bold text-gray-800 mb-4 text-center">Organize & Promote Your Events</h2>
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="College Campus Events" class="illustration-responsive rounded-xl mb-8 object-cover">
+                <h2 class="text-2xl-responsive font-bold text-gray-800 mb-4 text-center">Discover Exciting Events</h2>
                 <p class="text-base-responsive text-gray-600 text-center px-4">
-                    College management can easily upload, manage, and promote their events to a wider audience.
+                    Explore a wide range of college events happening near you, from hackathons to cultural fests.
                 </p>
             </div>
 
             <div class="flex items-center mb-8">
-                <div class="dot-indicator"></div>
-                <div class="dot-indicator"></div>
                 <div class="dot-indicator active"></div>
+                <div class="dot-indicator"></div>
+                <div class="dot-indicator"></div>
             </div>
 
             <div class="w-full max-w-sm mx-auto px-4">
-                <button onclick="nextPage(3)" class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
-                    Get Started
+                <button onclick="nextPage(1)" class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
+                    Next
                 </button>
                 <button onclick="goToLogin()" class="w-full py-3 mt-4 rounded-xl text-gray-600 font-semibold transition-colors duration-200 hover:text-gray-800">
                     Skip
@@ -126,26 +122,43 @@
             </div>
         </div>
     </div>
-   
+    
     <script>
         // Navigation functions
-        function finishOnboarding() {
-            window.location.href = "../Login page/Login Page.html";
+        function nextPage(currentPage) {
+            let nextPageUrl;
+            
+            switch(currentPage) {
+                case 1:
+                    nextPageUrl = "onboarding-2.html";
+                    break;
+                case 2:
+                    nextPageUrl = "onboarding-3.html";
+                    break;
+                case 3:
+                    nextPageUrl = "../home/home.html";
+                    break;
+                default:
+                    nextPageUrl = "../home/home.html";
+            }
+            
+            window.location.href = nextPageUrl;
         }
 
         function goToLogin() {
-            window.location.href = "../Login page/Login Page.html";
+            window.location.href = "../auth/login.html";
         }
 
-        // Add event listeners for onboarding page 3 (final page)
+        // Add event listeners for onboarding page 1
         document.querySelector("button:nth-of-type(1)").addEventListener("click", function() {
-            finishOnboarding(); // Get Started - go to login page
+            nextPage(1); // Go to onboarding page 2
         });
 
         document.querySelector("button:nth-of-type(2)").addEventListener("click", function() {
             goToLogin(); // Skip to login page
         });
     </script>
-    
+
 </body>
+
 </html>
