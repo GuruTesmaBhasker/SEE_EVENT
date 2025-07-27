@@ -115,4 +115,10 @@ def home():
 def profile():
     return render_template('profile/terms.html')
 
+<<<<<<< HEAD
 '''
+=======
+if __name__ == '__main__':
+    app.run(debug=True)
+    '''
+>>>>>>> 9aea05d8ffc479d391b2e784a4c0df9e06bd1cd1
