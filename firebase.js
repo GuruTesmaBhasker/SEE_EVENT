@@ -5,14 +5,15 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
+// For production, these should come from environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyBsHcgNKuW_4D0SF8nGZcUWmtwEF7xWfrs",
-  authDomain: "see-event-6f2ba.firebaseapp.com",
-  projectId: "see-event-6f2ba",
-  storageBucket: "see-event-6f2ba.firebasestorage.app",
-  messagingSenderId: "701870395562",
-  appId: "1:701870395562:web:e55e32a8d6bef806b6c0d3",
-  measurementId: "G-R9GXE15WM0"
+  apiKey: process.env.FIREBASE_API_KEY || "demo-api-key",
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN || "demo-project.firebaseapp.com",
+  projectId: process.env.FIREBASE_PROJECT_ID || "demo-project",
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "demo-project.appspot.com",
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "123456789",
+  appId: process.env.FIREBASE_APP_ID || "1:123456789:web:demo",
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID || "G-DEMO"
 };
 
 // Initialize Firebase
