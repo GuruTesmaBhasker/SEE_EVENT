@@ -28,9 +28,6 @@
     "http-server": "^14.1.1",
     "live-server": "^1.2.2"
   },
-  "dependencies": {
-    "firebase": "^10.7.1"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",

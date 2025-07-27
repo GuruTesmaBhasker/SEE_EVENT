@@ -214,12 +214,16 @@
         return;
       }
 
-      // Simple validation for demo (you can integrate Firebase login later)
-      if (email && password) {
-        alert('Login successful! Welcome back!');
-        // Redirect to home page after successful login
-        window.location.href = '../home/home.html';
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address!');
+        return;
       }
+
+      alert('Login successful! Welcome back!');
+      // Redirect to home page after successful login
+      window.location.href = '../home/home.html';
     }
   </script>
 </body>

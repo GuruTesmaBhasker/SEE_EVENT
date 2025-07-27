@@ -166,14 +166,9 @@
             </div>
         </div>
     </div>
-    <script type="module">
-        // Import Firebase functions
-        import { auth, db } from "../../firebase.js";
-        import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
+    <script>
         // Add event listener to the Sign Up button
-        document.querySelector("button").addEventListener("click", async function(e) {
+        document.querySelector("button").addEventListener("click", function(e) {
             e.preventDefault();
             
             const fullName = document.getElementById("fullname").value;
@@ -197,60 +192,17 @@
                 return;
             }
 
-            try {
-                // Create user account with Firebase Authentication
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                // Update the user's display name
-                await updateProfile(user, {
-                    displayName: fullName
-                });
-
-                // Store additional user data in Firestore
-                await setDoc(doc(db, "users", user.uid), {
-                    fullName: fullName,
-                    email: email,
-                    createdAt: new Date().toISOString(),
-                    lastLogin: new Date().toISOString(),
-                    profileCompleted: false,
-                    // You can add more fields as needed
-                    preferences: {
-                        notifications: true,
-                        emailUpdates: true
-                    }
-                });
-
-                console.log("User created and data stored:", user);
-                alert("Account created successfully! Welcome to SEE EVENT!");
-                
-                // Redirect to home page
-                window.location.href = "../home/home.html";
-                
-            } catch (error) {
-                console.error("Error creating account:", error);
-                
-                // Handle specific Firebase errors
-                let errorMessage = "Error creating account: ";
-                switch (error.code) {
-                    case 'auth/email-already-in-use':
-                        errorMessage += "This email is already registered. Please use a different email or try logging in.";
-                        break;
-                    case 'auth/invalid-email':
-                        errorMessage += "Please enter a valid email address.";
-                        break;
-                    case 'auth/weak-password':
-                        errorMessage += "Password is too weak. Please use a stronger password.";
-                        break;
-                    case 'auth/network-request-failed':
-                        errorMessage += "Network error. Please check your connection and try again.";
-                        break;
-                    default:
-                        errorMessage += error.message;
-                }
-                
-                alert(errorMessage);
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address!");
+                return;
             }
+
+            alert("Account created successfully! Welcome to SEE EVENT!");
+            
+            // Redirect to home page
+            window.location.href = "../home/home.html";
         });
 
         // Add event listener to the Login link
