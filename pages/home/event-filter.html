@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE EVENT Event Type Filter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAF9F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background-color: #fff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .filter-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .filter-option.selected {
+            background-color: #F5E7E2;
+            border: 2px solid #D66D4B;
+            box-shadow: 0 0 0 3px rgba(214, 109, 75, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .apply-button {
+            background-color: #D66D4B;
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            font-size: 16px;
+        }
+        .apply-button:hover {
+            background-color: #C06040;
+        }
+
+        /* Responsive text sizing */
+        .text-2xl-responsive {
+            font-size: 1.5rem; /* Default mobile size */
+        }
+        .text-lg-responsive {
+            font-size: 1.125rem; /* Default mobile size */
+        }
+        .text-base-responsive {
+            font-size: 1rem; /* Default mobile size */
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .text-2xl-responsive {
+                font-size: 2rem; /* 32px - tablet */
+            }
+            .text-lg-responsive {
+                font-size: 1.25rem; /* 20px - tablet */
+            }
+            .main-content {
+                padding: 2rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .text-lg-responsive {
+                font-size: 1.5rem; /* 24px - LARGE desktop size */
+            }
+            .text-base-responsive {
+                font-size: 1.25rem; /* 20px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 3rem 4rem;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .filter-option {
+                padding: 20px !important;
+                margin-bottom: 16px !important;
+            }
+            .filter-option span {
+                font-size: 18px !important;
+            }
+            button {
+                font-size: 20px !important;
+                padding: 18px 24px !important;
+            }
+            input {
+                font-size: 18px !important;
+                padding: 16px 20px !important;
+            }
+            #eventTypeSearch {
+                font-size: 18px !important;
+                padding: 16px 20px 16px 50px !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="main-container">
+        <!-- Event Type Filter Content -->
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToHome();">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl-responsive font-bold text-gray-800">Filter by Event Type</h1>
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="clearAllFilters();">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Search Event Type Input -->
+            <div class="mb-6">
+                <div class="relative">
+                    <input type="text" id="eventTypeSearch" placeholder="Search event types" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#D66D4B] focus:border-transparent text-gray-700" oninput="searchEventTypes();" onkeydown="handleKeyNavigation(event);" autocomplete="off">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <!-- Clear search button -->
+                    <button id="clearEventTypeSearch" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600" onclick="clearSearchAndSuggestions();" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <!-- Search Suggestions Dropdown -->
+                    <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-10 mt-1 hidden max-h-48 overflow-y-auto">
+                        <!-- Suggestions will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <!-- Event Type Options -->
+            <div class="flex-grow overflow-y-auto pr-2 -mr-2" id="eventTypeList">
+                <div class="filter-option" onclick="toggleEventType('Hackathon', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span>Hackathon</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Workshop', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                        </svg>
+                        <span>Workshop</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Cultural Fest', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm12 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-9-9v-3l12-3v7" />
+                        </svg>
+                        <span>Cultural Fest</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Technical Symposium', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span>Technical Symposium</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Sports Event', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Sports Event</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Guest Lecture', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span>Guest Lecture</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Webinar', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <span>Webinar</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div class="filter-option" onclick="toggleEventType('Exhibition', this);">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span>Exhibition</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Apply Filters Button -->
+            <div class="sticky bottom-0 w-full p-6 bg-white shadow-lg rounded-t-2xl">
+                <button class="w-full apply-button" onclick="applyEventTypeFilters();">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Event Type Filter functionality -->
+    <script>
+        let selectedEventTypes = [];
+        let currentSuggestionIndex = -1;
+        
+        // Predefined event types with additional details
+        const eventTypes = [
+            { name: 'Hackathon', icon: '💻', description: 'Coding competitions and programming events' },
+            { name: 'Workshop', icon: '🛠️', description: 'Hands-on learning sessions' },
+            { name: 'Cultural Fest', icon: '🎭', description: 'Arts, music, and cultural celebrations' },
+            { name: 'Technical Symposium', icon: '⚙️', description: 'Technical conferences and presentations' },
+            { name: 'Sports Event', icon: '⚽', description: 'Athletic competitions and sports activities' },
+            { name: 'Guest Lecture', icon: '👨‍🏫', description: 'Expert talks and educational sessions' },
+            { name: 'Webinar', icon: '📹', description: 'Online seminars and virtual events' },
+            { name: 'Exhibition', icon: '🖼️', description: 'Showcases and displays' },
+            { name: 'Conference', icon: '🎤', description: 'Professional meetings and discussions' },
+            { name: 'Seminar', icon: '📚', description: 'Educational and informational sessions' },
+            { name: 'Competition', icon: '🏆', description: 'Various contests and challenges' },
+            { name: 'Career Fair', icon: '💼', description: 'Job opportunities and networking' },
+            { name: 'Research Presentation', icon: '🔬', description: 'Academic research showcases' },
+            { name: 'Startup Pitch', icon: '🚀', description: 'Entrepreneurship and business ideas' },
+            { name: 'Art Show', icon: '🎨', description: 'Creative arts and design exhibitions' }
+        ];
+
+        // Navigate back to home page
+        function goBackToHome() {
+            window.location.href = 'home.html';
+        }
+
+        // Clear all selected filters
+        function clearAllFilters() {
+            selectedEventTypes = [];
+            // Remove all check marks and selected classes
+            const checkIcons = document.querySelectorAll('.check-icon');
+            const filterOptions = document.querySelectorAll('.filter-option');
+            
+            checkIcons.forEach(icon => {
+                icon.style.display = 'none';
+            });
+            
+            filterOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Clear search input and hide clear button
+            document.getElementById('eventTypeSearch').value = '';
+            document.getElementById('clearEventTypeSearch').style.display = 'none';
+            // Hide suggestions
+            hideSuggestions();
+            // Show all event types
+            showAllEventTypes();
+        }
+
+        // Toggle event type selection
+        function toggleEventType(eventTypeName, element) {
+            const checkIcon = element.querySelector('.check-icon');
+            
+            if (selectedEventTypes.includes(eventTypeName)) {
+                // Remove from selected
+                selectedEventTypes = selectedEventTypes.filter(type => type !== eventTypeName);
+                checkIcon.style.display = 'none';
+                element.classList.remove('selected');
+            } else {
+                // Add to selected
+                selectedEventTypes.push(eventTypeName);
+                checkIcon.style.display = 'block';
+                element.classList.add('selected');
+            }
+        }
+
+        // Search functionality with auto-suggestions
+        function searchEventTypes() {
+            const searchTerm = document.getElementById('eventTypeSearch').value.toLowerCase().trim();
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            const clearButton = document.getElementById('clearEventTypeSearch');
+            
+            // Show/hide clear button
+            if (searchTerm.length > 0) {
+                clearButton.style.display = 'flex';
+            } else {
+                clearButton.style.display = 'none';
+            }
+            
+            if (searchTerm.length === 0) {
+                hideSuggestions();
+                showAllEventTypes();
+                return;
+            }
+
+            // Filter event types based on search term
+            const matchingEventTypes = eventTypes.filter(eventType => 
+                eventType.name.toLowerCase().includes(searchTerm) || 
+                eventType.description.toLowerCase().includes(searchTerm)
+            );
+
+            // Show suggestions including option to add custom event type
+            showSuggestions(matchingEventTypes, searchTerm);
+
+            // Also filter the existing event type list
+            filterExistingEventTypes(searchTerm);
+        }
+
+        // Clear search and suggestions
+        function clearSearchAndSuggestions() {
+            const searchInput = document.getElementById('eventTypeSearch');
+            const clearButton = document.getElementById('clearEventTypeSearch');
+            
+            searchInput.value = '';
+            clearButton.style.display = 'none';
+            hideSuggestions();
+            showAllEventTypes();
+            searchInput.focus();
+        }
+
+        // Show search suggestions
+        function showSuggestions(eventTypes, searchTerm) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            currentSuggestionIndex = -1;
+            
+            suggestionsContainer.innerHTML = '';
+            
+            // Show matching event types first
+            eventTypes.slice(0, 6).forEach((eventType, index) => {
+                const suggestionDiv = document.createElement('div');
+                suggestionDiv.className = 'p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100';
+                suggestionDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="text-lg mr-3">${eventType.icon}</span>
+                        <div class="flex-1">
+                            <span class="font-medium text-gray-800">${eventType.name}</span>
+                            <div class="text-sm text-gray-500">${eventType.description}</div>
+                        </div>
+                    </div>
+                `;
+                
+                suggestionDiv.onclick = () => selectSuggestion(eventType.name);
+                suggestionsContainer.appendChild(suggestionDiv);
+            });
+
+            // Add option to add custom event type if no exact match found
+            const exactMatch = eventTypes.find(eventType => eventType.name.toLowerCase() === searchTerm);
+            if (!exactMatch && searchTerm.length >= 2) {
+                const customEventTypeDiv = document.createElement('div');
+                customEventTypeDiv.className = 'p-3 hover:bg-gray-50 cursor-pointer border-t-2 border-[#D66D4B] bg-[#FAF9F6]';
+                customEventTypeDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <div>
+                            <span class="font-medium text-[#D66D4B]">Add "${capitalizeFirstLetter(searchTerm)}"</span>
+                            <div class="text-sm text-gray-500">Add this event type to your filters</div>
+                        </div>
+                    </div>
+                `;
+                
+                customEventTypeDiv.onclick = () => addCustomEventType(capitalizeFirstLetter(searchTerm));
+                suggestionsContainer.appendChild(customEventTypeDiv);
+            }
+            
+            suggestionsContainer.classList.remove('hidden');
+        }
+
+        // Hide suggestions
+        function hideSuggestions() {
+            document.getElementById('searchSuggestions').classList.add('hidden');
+            currentSuggestionIndex = -1;
+        }
+
+        // Select a suggestion
+        function selectSuggestion(eventTypeName) {
+            document.getElementById('eventTypeSearch').value = eventTypeName;
+            hideSuggestions();
+            
+            // Auto-select this event type if it exists in the list
+            const eventTypeOptions = document.querySelectorAll('.filter-option');
+            eventTypeOptions.forEach(option => {
+                const spanText = option.querySelector('span').textContent;
+                if (spanText === eventTypeName) {
+                    option.style.display = 'flex';
+                    // Auto-select it
+                    if (!selectedEventTypes.includes(eventTypeName)) {
+                        toggleEventType(eventTypeName, option);
+                    }
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        // Add custom event type to the list
+        function addCustomEventType(eventTypeName) {
+            // Check if event type already exists in the list
+            const existingEventType = Array.from(document.querySelectorAll('.filter-option span')).find(
+                span => span.textContent === eventTypeName
+            );
+            
+            if (existingEventType) {
+                // If it exists, just select it
+                selectSuggestion(eventTypeName);
+                return;
+            }
+
+            // Create new event type option
+            const eventTypeList = document.getElementById('eventTypeList');
+            const newEventTypeDiv = document.createElement('div');
+            newEventTypeDiv.className = 'filter-option';
+            newEventTypeDiv.onclick = () => toggleEventType(eventTypeName, newEventTypeDiv);
+            
+            newEventTypeDiv.innerHTML = `
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D66D4B] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span>${eventTypeName}</span>
+                    <span class="text-xs text-[#D66D4B] bg-[#F5E7E2] px-2 py-1 rounded-full ml-2">Custom</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            `;
+            
+            // Insert at the top of the list
+            eventTypeList.insertBefore(newEventTypeDiv, eventTypeList.firstChild);
+            
+            // Auto-select the new event type
+            toggleEventType(eventTypeName, newEventTypeDiv);
+            
+            // Clear search and hide suggestions
+            document.getElementById('eventTypeSearch').value = '';
+            hideSuggestions();
+            
+            // Show success message
+            showCustomEventTypeMessage(eventTypeName);
+        }
+
+        // Show message when custom event type is added
+        function showCustomEventTypeMessage(eventTypeName) {
+            // Create temporary message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    "${eventTypeName}" added and selected!
+                </div>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                messageDiv.style.opacity = '0';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }, 2700);
+        }
+
+        // Handle keyboard navigation for suggestions
+        function handleKeyNavigation(event) {
+            const suggestions = document.querySelectorAll('#searchSuggestions > div');
+            
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                currentSuggestionIndex = Math.min(currentSuggestionIndex + 1, suggestions.length - 1);
+                highlightSuggestion(suggestions);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                currentSuggestionIndex = Math.max(currentSuggestionIndex - 1, -1);
+                highlightSuggestion(suggestions);
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                if (currentSuggestionIndex >= 0 && suggestions[currentSuggestionIndex]) {
+                    suggestions[currentSuggestionIndex].click();
+                } else {
+                    // If no suggestion is selected, try to add as custom event type
+                    const searchTerm = document.getElementById('eventTypeSearch').value.trim();
+                    if (searchTerm.length >= 2) {
+                        addCustomEventType(capitalizeFirstLetter(searchTerm));
+                    }
+                }
+            } else if (event.key === 'Escape') {
+                hideSuggestions();
+            }
+        }
+
+        // Highlight current suggestion
+        function highlightSuggestion(suggestions) {
+            suggestions.forEach((suggestion, index) => {
+                if (index === currentSuggestionIndex) {
+                    suggestion.classList.add('bg-gray-100');
+                } else {
+                    suggestion.classList.remove('bg-gray-100');
+                }
+            });
+        }
+
+        // Filter existing event type options
+        function filterExistingEventTypes(searchTerm) {
+            const eventTypeOptions = document.querySelectorAll('.filter-option');
+            
+            eventTypeOptions.forEach(option => {
+                const eventTypeText = option.querySelector('span').textContent.toLowerCase();
+                if (eventTypeText.includes(searchTerm)) {
+                    option.style.display = 'flex';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        // Show all event types (for clearing search)
+        function showAllEventTypes() {
+            const eventTypeOptions = document.querySelectorAll('.filter-option');
+            eventTypeOptions.forEach(option => {
+                option.style.display = 'flex';
+            });
+        }
+
+        // Capitalize first letter of each word
+        function capitalizeFirstLetter(str) {
+            return str.split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+        }
+
+        // Apply event type filters and return to home page
+        function applyEventTypeFilters() {
+            if (selectedEventTypes.length > 0) {
+                // Store selected event types in localStorage for the home page to use
+                localStorage.setItem('selectedEventTypes', JSON.stringify(selectedEventTypes));
+                alert('Event type filters applied: ' + selectedEventTypes.join(', '));
+            } else {
+                // Clear any existing event type filters
+                localStorage.removeItem('selectedEventTypes');
+                alert('No event types selected. All event types will be shown.');
+            }
+            
+            // Navigate back to home page
+            goBackToHome();
+        }
+
+        // Load previously selected event types when page loads
+        window.onload = function() {
+            const savedEventTypes = localStorage.getItem('selectedEventTypes');
+            if (savedEventTypes) {
+                selectedEventTypes = JSON.parse(savedEventTypes);
+                
+                // Show check marks and selected state for previously selected event types
+                selectedEventTypes.forEach(eventTypeName => {
+                    const eventTypeOptions = document.querySelectorAll('.filter-option');
+                    eventTypeOptions.forEach(option => {
+                        const spanText = option.querySelector('span').textContent;
+                        if (spanText === eventTypeName) {
+                            option.querySelector('.check-icon').style.display = 'block';
+                            option.classList.add('selected');
+                        }
+                    });
+                });
+            }
+        };
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchInput = document.getElementById('eventTypeSearch');
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                hideSuggestions();
+            }
+        });
+    </script>
+</body>
+</html>

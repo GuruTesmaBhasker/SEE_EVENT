@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE EVENT Payment Gateway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAF9F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #3B3B3B;
+            background-color: #F8FAFC;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #D66D4B;
+            box-shadow: 0 0 0 2px rgba(214, 109, 75, 0.2);
+        }
+
+        /* Responsive text sizing */
+        .text-2xl-responsive {
+            font-size: 1.5rem; /* Default mobile size */
+        }
+        .text-xl-responsive {
+            font-size: 1.25rem; /* Default mobile size */
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .text-xl-responsive {
+                font-size: 2rem; /* 32px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 3rem 4rem;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            .input-field {
+                font-size: 18px !important;
+                padding: 16px 20px !important;
+            }
+            button {
+                font-size: 20px !important;
+                padding: 18px 24px !important;
+            }
+            label {
+                font-size: 18px !important;
+            }
+            p {
+                font-size: 18px !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="main-container">
+        <!-- Payment Gateway Content -->
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
+            color: #3B3B3B;
+            flex-grow: 1;
+        }
+        .payment-option input[type="radio"] {
+            accent-color: #D66D4B; /* Style radio button with accent color */
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <div class="notch"></div>
+        <div class="status-bar">
+            <span class="time">9:41</span>
+            <div class="icons">
+                <span>📶</span>
+                <span>🔋</span>
+            </div>
+        </div>
+
+        <!-- Payment Gateway Content -->
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="console.log('Back to Event Details Page');">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl-responsive font-bold text-gray-800">Payment</h1>
+                <div class="w-6"></div> <!-- Placeholder for alignment -->
+            </div>
+
+            <!-- Payment Summary -->
+            <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-3">Order Summary</h3>
+                <div class="flex justify-between items-center mb-2">
+                    <p class="text-gray-700">CodeSprint Hackathon 2025</p>
+                    <p class="font-semibold text-gray-800">₹500</p>
+                </div>
+                <div class="flex justify-between items-center text-lg font-bold text-gray-800 border-t border-gray-200 pt-3 mt-3">
+                    <p>Total</p>
+                    <p>₹500</p>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="flex-grow">
+                <h3 class="text-lg font-bold text-gray-800 mb-4">Choose Payment Method</h3>
+
+                <div class="payment-option">
+                    <img src="https://placehold.co/40x40/ffffff/000000?text=UPI" alt="UPI Icon">
+                    <span>UPI</span>
+                    <input type="radio" name="payment_method" value="upi" checked>
+                </div>
+
+                <div class="payment-option">
+                    <img src="https://placehold.co/40x40/ffffff/000000?text=Card" alt="Card Icon">
+                    <span>Credit/Debit Card</span>
+                    <input type="radio" name="payment_method" value="card">
+                </div>
+
+                <div class="payment-option">
+                    <img src="https://placehold.co/40x40/ffffff/000000?text=Net" alt="Netbanking Icon">
+                    <span>Netbanking</span>
+                    <input type="radio" name="payment_method" value="netbanking">
+                </div>
+
+                <div class="payment-option">
+                    <img src="https://placehold.co/40x40/ffffff/000000?text=Wallet" alt="Wallet Icon">
+                    <span>Wallets</span>
+                    <input type="radio" name="payment_method" value="wallet">
+                </div>
+            </div>
+
+            <!-- Pay Now Button -->
+            <div class="sticky bottom-0 w-full p-6 bg-white shadow-lg rounded-t-2xl">
+                <button class="w-full payment-button" onclick="console.log('Proceeding to Payment Confirmation');">
+                    Pay Now
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

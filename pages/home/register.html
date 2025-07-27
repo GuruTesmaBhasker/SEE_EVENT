@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE EVENT - Register for Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAF9F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 3rem 4rem;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            button {
+                font-size: 20px !important;
+                padding: 18px 24px !important;
+            }
+            input {
+                font-size: 18px !important;
+                padding: 16px 20px !important;
+            }
+            label {
+                font-size: 18px !important;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.2s ease-in-out;
+            background-color: #F9FAFB;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #D66D4B;
+            background-color: #FFFFFF;
+        }
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        .register-button {
+            background-color: #D66D4B;
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+        }
+        .register-button:hover {
+            background-color: #C06040;
+        }
+        .register-button:disabled {
+            background-color: #9CA3AF;
+            cursor: not-allowed;
+        }
+        .event-header {
+            background: linear-gradient(135deg, #D66D4B, #F5E7E2);
+            padding: 20px;
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 20px;
+        }
+        .fee-badge {
+            background-color: #10B981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="main-container">
+        <!-- Event Registration Content -->
+        <div class="flex flex-col h-full w-full main-content overflow-y-auto">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 pb-4">
+                <button class="p-2 rounded-full bg-[#F5E7E2] text-[#D66D4B] shadow-sm" onclick="goBackToHome();">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl-responsive font-bold text-gray-800">Event Registration</h1>
+                <div class="w-10"></div>
+            </div>
+
+            <!-- Event Info Header -->
+            <div class="event-header mx-6">
+                <h2 id="eventTitle" class="text-white text-xl font-bold mb-2">CodeSprint Hackathon 2025</h2>
+                <p id="eventDetails" class="text-white opacity-90 mb-3">Tech Innovators College • Oct 26-27, 2025</p>
+                <span id="eventFee" class="fee-badge">Registration Fee: ₹500</span>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="px-6 pb-6 flex-grow">
+                <form id="registrationForm">
+                    <!-- Personal Information -->
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Personal Information</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter 10-digit mobile number" maxlength="10" required>
+                        <small class="text-gray-500 text-xs mt-1 block">Enter 10-digit mobile number without country code</small>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="form-group">
+                            <label class="form-label" for="age">Age *</label>
+                            <input type="number" id="age" name="age" class="form-input" placeholder="18" min="16" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="gender">Gender</label>
+                            <select id="gender" name="gender" class="form-input form-select">
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Academic Information</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="institution">College/Institution *</label>
+                        <input type="text" id="institution" name="institution" class="form-input" placeholder="Your college name" required>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="form-group">
+                            <label class="form-label" for="course">Course/Degree *</label>
+                            <input type="text" id="course" name="course" class="form-input" placeholder="B.Tech CSE" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="year">Year of Study *</label>
+                            <select id="year" name="year" class="form-input form-select" required>
+                                <option value="">Select</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Post Graduate">Post Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Team Information (for team events) -->
+                    <div class="form-group" id="teamSizeGroup" style="display: none;">
+                        <label class="form-label" for="teamSize">Participation Type</label>
+                        <select id="teamSize" name="teamSize" class="form-input form-select" onchange="updateTeamFields();">
+                            <option value="1">Individual</option>
+                            <option value="2">Team of 2</option>
+                            <option value="3">Team of 3</option>
+                            <option value="4">Team of 4</option>
+                        </select>
+                    </div>
+
+                    <div id="teamMembersSection" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label" for="teamName">Team Name</label>
+                            <input type="text" id="teamName" name="teamName" class="form-input" placeholder="Enter your team name">
+                        </div>
+                        
+                        <div id="teamMemberInputs"></div>
+                    </div>
+
+                    <!-- Experience Level (for technical events) -->
+                    <div class="form-group" id="experienceGroup" style="display: none;">
+                        <label class="form-label" for="experience">Experience Level</label>
+                        <select id="experience" name="experience" class="form-input form-select">
+                            <option value="">Select level</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-group mt-6">
+                        <label class="flex items-start">
+                            <input type="checkbox" id="termsAccepted" name="termsAccepted" class="mt-1 mr-3" required>
+                            <span class="text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-[#D66D4B] underline">Terms and Conditions</a> and confirm that all information provided is accurate.
+                            </span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register Button -->
+            <div class="sticky bottom-0 p-6 bg-white shadow-lg rounded-t-2xl">
+                <button type="submit" form="registrationForm" class="register-button">
+                    Complete Registration
+                </button>
+                <p class="text-center text-xs text-gray-500 mt-2">
+                    You will receive a confirmation email after registration
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Registration functionality -->
+    <script>
+        let currentEventData = {};
+
+        window.onload = function() {
+            loadEventData();
+            setupFormValidation();
+        };
+
+        function loadEventData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventParam = urlParams.get('event');
+            
+            // Load event data from localStorage or use defaults
+            const storedEventData = localStorage.getItem('currentEventForRegistration');
+            if (storedEventData) {
+                currentEventData = JSON.parse(storedEventData);
+            } else {
+                // Default event data based on URL parameter
+                const eventData = {
+                    'Hackathon': {
+                        title: 'CodeSprint Hackathon 2025',
+                        organizer: 'Tech Innovators College',
+                        date: 'Oct 26-27, 2025',
+                        fee: '₹500',
+                        maxTeamSize: 4,
+                        type: 'technical'
+                    },
+                    'Cultural Fest': {
+                        title: 'Euphoria Cultural Fest',
+                        organizer: 'Arts & Science University',
+                        date: 'Nov 15, 2025',
+                        fee: '₹200',
+                        maxTeamSize: 1,
+                        type: 'cultural'
+                    },
+                    'AI Workshop': {
+                        title: 'AI & Machine Learning Workshop',
+                        organizer: 'Engineering Institute',
+                        date: 'Dec 5, 2025',
+                        fee: '₹300',
+                        maxTeamSize: 1,
+                        type: 'technical'
+                    }
+                };
+                currentEventData = eventData[eventParam] || eventData['Hackathon'];
+            }
+            
+            // Update UI with event data
+            document.getElementById('eventTitle').textContent = currentEventData.title;
+            document.getElementById('eventDetails').textContent = `${currentEventData.organizer} • ${currentEventData.date}`;
+            document.getElementById('eventFee').textContent = `Registration Fee: ${currentEventData.fee}`;
+            
+            // Show/hide fields based on event type
+            const teamSizeGroup = document.getElementById('teamSizeGroup');
+            const experienceGroup = document.getElementById('experienceGroup');
+            
+            if (currentEventData.maxTeamSize > 1) {
+                teamSizeGroup.style.display = 'block';
+                // Update team size options
+                const teamSelect = document.getElementById('teamSize');
+                teamSelect.innerHTML = '';
+                for (let i = 1; i <= currentEventData.maxTeamSize; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i === 1 ? 'Individual' : `Team of ${i}`;
+                    teamSelect.appendChild(option);
+                }
+            } else {
+                teamSizeGroup.style.display = 'none';
+                document.getElementById('teamMembersSection').style.display = 'none';
+            }
+            
+            // Show experience field for technical events
+            if (currentEventData.type === 'technical') {
+                experienceGroup.style.display = 'block';
+            }
+        }
+
+        function goBackToHome() {
+            window.location.href = 'home.html';
+        }
+
+        function updateTeamFields() {
+            const teamSize = parseInt(document.getElementById('teamSize').value);
+            const teamSection = document.getElementById('teamMembersSection');
+            const teamInputs = document.getElementById('teamMemberInputs');
+            
+            if (teamSize > 1) {
+                teamSection.style.display = 'block';
+                teamInputs.innerHTML = '';
+                
+                for (let i = 2; i <= teamSize; i++) {
+                    teamInputs.innerHTML += `
+                        <div class="form-group">
+                            <label class="form-label" for="member${i}Name">Team Member ${i} Name *</label>
+                            <input type="text" id="member${i}Name" name="member${i}Name" class="form-input" placeholder="Team member ${i} name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="member${i}Phone">Team Member ${i} Phone *</label>
+                            <input type="tel" id="member${i}Phone" name="member${i}Phone" class="form-input" placeholder="10-digit mobile number" maxlength="10" required>
+                        </div>
+                    `;
+                }
+                
+                // Add phone formatting to new phone inputs
+                for (let i = 2; i <= teamSize; i++) {
+                    const phoneInput = document.getElementById(`member${i}Phone`);
+                    if (phoneInput) {
+                        phoneInput.addEventListener('input', formatPhoneNumber);
+                    }
+                }
+            } else {
+                teamSection.style.display = 'none';
+            }
+        }
+
+        function setupFormValidation() {
+            const form = document.getElementById('registrationForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate required fields
+                const requiredFields = form.querySelectorAll('[required]');
+                let allValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = '#EF4444';
+                        allValid = false;
+                    } else {
+                        field.style.borderColor = '#E5E7EB';
+                    }
+                });
+                
+                if (!allValid) {
+                    showMessage('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Validate email format
+                const email = document.getElementById('email').value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showMessage('Please enter a valid email address', 'error');
+                    return;
+                }
+                
+                // Validate phone number
+                const phone = document.getElementById('phone').value;
+                if (!isValidPhoneNumber(phone)) {
+                    showMessage('Please enter a valid 10-digit mobile number', 'error');
+                    return;
+                }
+                
+                // Validate team member phone numbers if applicable
+                const teamSize = parseInt(document.getElementById('teamSize').value || 1);
+                if (teamSize > 1) {
+                    for (let i = 2; i <= teamSize; i++) {
+                        const memberPhone = document.getElementById(`member${i}Phone`);
+                        if (memberPhone && !isValidPhoneNumber(memberPhone.value)) {
+                            showMessage(`Please enter a valid phone number for team member ${i}`, 'error');
+                            return;
+                        }
+                    }
+                }
+                
+                // Check terms acceptance
+                if (!document.getElementById('termsAccepted').checked) {
+                    showMessage('Please accept the terms and conditions', 'error');
+                    return;
+                }
+                
+                // Collect form data
+                const formData = new FormData(form);
+                const registrationData = {};
+                for (let [key, value] of formData.entries()) {
+                    registrationData[key] = value;
+                }
+                
+                // Add event information
+                registrationData.eventTitle = currentEventData.title;
+                registrationData.eventOrganizer = currentEventData.organizer;
+                registrationData.eventDate = currentEventData.date;
+                registrationData.registrationDate = new Date().toISOString();
+                registrationData.registrationId = 'REG' + Date.now();
+                
+                // Store registration data
+                let registrations = JSON.parse(localStorage.getItem('eventRegistrations') || '[]');
+                registrations.push(registrationData);
+                localStorage.setItem('eventRegistrations', JSON.stringify(registrations));
+                
+                // Show success message
+                showMessage(`Registration Successful! 🎉\n\nRegistration ID: ${registrationData.registrationId}\n\nYou will receive a confirmation email shortly.`, 'success');
+                
+                // Redirect to home page
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 3000);
+            });
+        }
+
+        // Improved phone number validation
+        function isValidPhoneNumber(phone) {
+            // Remove all non-digit characters
+            const cleaned = phone.replace(/\D/g, '');
+            // Check if it's exactly 10 digits
+            return cleaned.length === 10 && /^[6-9]\d{9}$/.test(cleaned);
+        }
+
+        // Better phone number formatting
+        function formatPhoneNumber(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove all non-digits
+            
+            // Limit to 10 digits
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            // Set the formatted value
+            e.target.value = value;
+            
+            // Visual feedback for validation
+            if (value.length === 10 && /^[6-9]/.test(value)) {
+                e.target.style.borderColor = '#10B981'; // Green for valid
+            } else if (value.length > 0) {
+                e.target.style.borderColor = '#EF4444'; // Red for invalid
+            } else {
+                e.target.style.borderColor = '#E5E7EB'; // Default
+            }
+        }
+
+        // Show messages to user
+        function showMessage(message, type) {
+            // Create or update message element
+            let messageEl = document.getElementById('formMessage');
+            if (!messageEl) {
+                messageEl = document.createElement('div');
+                messageEl.id = 'formMessage';
+                messageEl.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg max-w-sm text-center';
+                document.body.appendChild(messageEl);
+            }
+            
+            // Style based on type
+            if (type === 'success') {
+                messageEl.className += ' bg-green-100 text-green-800 border border-green-200';
+            } else {
+                messageEl.className += ' bg-red-100 text-red-800 border border-red-200';
+            }
+            
+            messageEl.textContent = message;
+            messageEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds for error messages
+            if (type === 'error') {
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Phone number formatting for main phone field
+        document.getElementById('phone').addEventListener('input', formatPhoneNumber);
+
+        // Real-time validation and styling
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#EF4444';
+                } else if (this.type === 'tel' && this.value && !isValidPhoneNumber(this.value)) {
+                    this.style.borderColor = '#EF4444';
+                } else {
+                    this.style.borderColor = '#E5E7EB';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#D66D4B';
+            });
+        });
+
+        // Add real-time name validation
+        document.getElementById('fullName').addEventListener('input', function(e) {
+            // Only allow letters, spaces, and common name characters
+            let value = e.target.value.replace(/[^a-zA-Z\s\.\-']/g, '');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
