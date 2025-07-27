@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEE EVENT Sign Up Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAF9F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #3B3B3B;
+            background-color: #F8FAFC;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #D66D4B;
+            box-shadow: 0 0 0 2px rgba(214, 109, 75, 0.2);
+        }
+
+        /* Responsive text sizing */
+        .text-4xl-responsive {
+            font-size: 2.25rem; /* Default mobile size */
+        }
+        .text-2xl-responsive {
+            font-size: 1.5rem; /* Default mobile size */
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .text-4xl-responsive {
+                font-size: 2.25rem; /* 36px - mobile size */
+            }
+            .text-2xl-responsive {
+                font-size: 1.5rem; /* 24px - mobile size */
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .input-field {
+                font-size: 16px; /* Prevent zoom on iOS */
+                padding: 14px 16px;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .text-4xl-responsive {
+                font-size: 3.5rem; /* 56px - tablet size */
+            }
+            .text-2xl-responsive {
+                font-size: 2.25rem; /* 36px - tablet size */
+            }
+            .main-content {
+                padding: 3rem 2rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .input-field {
+                font-size: 18px;
+                padding: 16px 20px;
+            }
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1025px) {
+            .text-4xl-responsive {
+                font-size: 5rem; /* 80px - LARGE desktop size */
+            }
+            .text-2xl-responsive {
+                font-size: 3rem; /* 48px - LARGE desktop size */
+            }
+            .main-content {
+                padding: 5rem 4rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .input-field {
+                font-size: 20px;
+                padding: 20px 24px;
+            }
+            label {
+                font-size: 18px !important;
+            }
+            .text-gray-600 {
+                font-size: 18px !important;
+            }
+            button {
+                font-size: 20px !important;
+                padding: 18px 24px !important;
+            }
+            a {
+                font-size: 18px !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="main-container">
+        <!-- Sign Up Content -->
+        <div class="flex flex-col justify-center min-h-full w-full main-content">
+            <div>
+                <div class="flex items-center mb-10 justify-center">
+                    <h1 class="text-4xl-responsive font-extrabold" style="color: #D66D4B;">SEE</h1>
+                    <h1 class="text-4xl-responsive font-extrabold ml-2" style="color: #3B3B3B;">EVENT</h1>
+                </div>
+
+                <h2 class="text-2xl-responsive font-bold text-gray-800 mb-8 text-center">Create Your Account</h2>
+
+                <div class="mb-4">
+                    <label for="fullname" class="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
+                    <input type="text" id="fullname" placeholder="John Doe" class="input-field">
+                </div>
+
+                <div class="mb-4">
+                    <label for="signup-email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com" class="input-field">
+                </div>
+
+                <div class="mb-4">
+                    <label for="signup-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="signup-password" placeholder="********" class="input-field">
+                </div>
+
+                <div class="mb-6">
+                    <label for="confirm-password" class="block text-gray-700 text-sm font-medium mb-2">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="********" class="input-field">
+                </div>
+
+                <button class="w-full py-3 rounded-xl text-white font-semibold shadow-md transition-colors duration-200 hover:bg-[#C06040]" style="background-color: #D66D4B;">
+                    Sign Up
+                </button>
+
+                <div class="text-center mt-6">
+                    <p class="text-gray-600">Already have an account?</p>
+                    <a href="#" class="font-semibold" style="color: #D66D4B;">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        // Import Firebase functions
+        import { auth, db } from "../../firebase.js";
+        import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // Add event listener to the Sign Up button
+        document.querySelector("button").addEventListener("click", async function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById("fullname").value;
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            // Basic validation
+            if (!fullName || !email || !password || !confirmPassword) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long!");
+                return;
+            }
+
+            try {
+                // Create user account with Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Update the user's display name
+                await updateProfile(user, {
+                    displayName: fullName
+                });
+
+                // Store additional user data in Firestore
+                await setDoc(doc(db, "users", user.uid), {
+                    fullName: fullName,
+                    email: email,
+                    createdAt: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    profileCompleted: false,
+                    // You can add more fields as needed
+                    preferences: {
+                        notifications: true,
+                        emailUpdates: true
+                    }
+                });
+
+                console.log("User created and data stored:", user);
+                alert("Account created successfully! Welcome to SEE EVENT!");
+                
+                // Redirect to home page
+                window.location.href = "../home/home.html";
+                
+            } catch (error) {
+                console.error("Error creating account:", error);
+                
+                // Handle specific Firebase errors
+                let errorMessage = "Error creating account: ";
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage += "This email is already registered. Please use a different email or try logging in.";
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage += "Please enter a valid email address.";
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage += "Password is too weak. Please use a stronger password.";
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage += "Network error. Please check your connection and try again.";
+                        break;
+                    default:
+                        errorMessage += error.message;
+                }
+                
+                alert(errorMessage);
+            }
+        });
+
+        // Add event listener to the Login link
+        document.querySelector("a[href='#']").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>
