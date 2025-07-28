@@ -1,6 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from db import db
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY', 'your-default-secret-key')
+
+# Database connection initialization
+def init_db():
+    """Initialize database connection"""
+    try:
+        if db.connect():
+            print("✅ Database connected successfully!")
+        else:
+            print("⚠️ Warning: Could not connect to database")
+    except Exception as e:
+        print(f"❌ Database connection error: {e}")
+
+# Initialize database when app starts
+with app.app_context():
+    init_db()
 
 @app.route('/')
 def home():
@@ -103,17 +125,4 @@ def logindb():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-
-'''@app.route('/')
-def home():
-    return 'Hey Ilakkiyaa, Flask is working! 💥'
-    
-
-@app.route('/profile')
-def profile():
-    return render_template('profile/terms.html')
-
-<<<<<<< HEAD
-''' 
+    app.run(debug=True) 
