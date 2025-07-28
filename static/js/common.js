@@ -10,7 +10,7 @@ const APP_CONFIG = {
     name: 'SEE EVENT',
     version: '1.0.0',
     apiUrl: window.location.origin,
-    defaultPage: '/pages/onboarding/onboarding-1.html',
+    defaultPage: 'onboarding-1.html',
     storage: {
         prefix: 'seeEvent_',
         keys: {

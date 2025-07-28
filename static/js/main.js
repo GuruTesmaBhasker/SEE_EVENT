@@ -14,32 +14,32 @@ function goBack() {
 }
 
 function goBackToHome() {
-    navigateToPage('pages/home/home.html');
+    navigateToPage('home.html');
 }
 
 function goBackToProfile() {
-    navigateToPage('pages/profile/profile.html');
+    navigateToPage('profile.html');
 }
 
 // Authentication navigation
 function navigateToLogin() {
-    navigateToPage('pages/auth/login.html');
+    navigateToPage('login.html');
 }
 
 function navigateToSignUp() {
-    navigateToPage('pages/auth/signup.html');
+    navigateToPage('signup.html');
 }
 
 function navigateToForgotPassword() {
-    navigateToPage('pages/auth/forgot-password.html');
+    navigateToPage('forgot-password.html');
 }
 
 // Onboarding navigation
 function nextOnboarding(currentPage) {
     const nextPages = {
-        1: 'pages/onboarding/onboarding-2.html',
-        2: 'pages/onboarding/onboarding-3.html',
-        3: 'pages/home/home.html'
+        1: 'onboarding-2.html',
+        2: 'onboarding-3.html',
+        3: 'home.html'
     };
     
     if (nextPages[currentPage]) {
@@ -48,61 +48,61 @@ function nextOnboarding(currentPage) {
 }
 
 function skipOnboarding() {
-    navigateToPage('pages/home/home.html');
+    navigateToPage('home.html');
 }
 
 // Home page navigation
 function navigateToCreateEvent() {
-    navigateToPage('pages/home/create-event.html');
+    navigateToPage('create-event.html');
 }
 
 function navigateToEventDetails(eventName) {
-    navigateToPage('pages/home/event-details.html?event=' + encodeURIComponent(eventName));
+    navigateToPage('event-details.html?event=' + encodeURIComponent(eventName));
 }
 
 function navigateToDateFilter() {
-    navigateToPage('pages/home/date-filter.html');
+    navigateToPage('date-filter.html');
 }
 
 function navigateToEventFilter() {
-    navigateToPage('pages/home/event-filter.html');
+    navigateToPage('event-filter.html');
 }
 
 function navigateToLocationFilter() {
-    navigateToPage('pages/home/location-filter.html');
+    navigateToPage('location-filter.html');
 }
 
 function navigateToRegister(eventName) {
-    navigateToPage('pages/home/register.html?event=' + encodeURIComponent(eventName));
+    navigateToPage('register.html?event=' + encodeURIComponent(eventName));
 }
 
 function navigateToPayment() {
-    navigateToPage('pages/home/payment.html');
+    navigateToPage('payment.html');
 }
 
 // Profile navigation
 function navigateToProfile() {
-    navigateToPage('pages/profile/profile.html');
+    navigateToPage('profile.html');
 }
 
 function navigateToEditProfile() {
-    navigateToPage('pages/profile/edit-profile.html');
+    navigateToPage('edit-profile.html');
 }
 
 function navigateToBookmarks() {
-    navigateToPage('pages/profile/bookmarks.html');
+    navigateToPage('bookmarks.html');
 }
 
 function navigateToFeedback() {
-    navigateToPage('pages/profile/feedback.html');
+    navigateToPage('feedback.html');
 }
 
 function navigateToMyEvents() {
-    navigateToPage('pages/profile/my-events.html');
+    navigateToPage('my-events.html');
 }
 
 function navigateToTerms() {
-    navigateToPage('pages/profile/terms.html');
+    navigateToPage('terms.html');
 }
 
 // Form validation functions
@@ -206,7 +206,7 @@ function isUserLoggedIn() {
 
 function logout() {
     removeFromStorage('userData');
-    navigateToPage('pages/auth/login.html');
+    navigateToPage('login.html');
 }
 
 // Event management

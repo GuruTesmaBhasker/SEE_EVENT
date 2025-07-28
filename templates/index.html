@@ -205,7 +205,7 @@
     <script>
         // Auto-redirect after 3 seconds
         setTimeout(function() {
-            navigateToPage("pages/onboarding/onboarding-1.html");
+            window.location.href = {{url_for('onboarding-1')}};
         }, 3000);
     </script>
 </body>

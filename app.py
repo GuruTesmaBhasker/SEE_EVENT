@@ -10,93 +10,93 @@ def home():
 
 @app.route('/profile')
 def profiles():
-    return render_template('profile/profile.html')
+    return render_template('/profile.html')
 
-@app.route('/pages/signup')
+@app.route('/signup')
 def signupdb():
     return render_template('signup.html')
 
-@app.route('/home/create-event')
+@app.route('/create-event')
 def create_eventdb():
-    return render_template('home/create-event.html')
+    return render_template('/create-event.html')
 
-@app.route('/home/date-filter')
+@app.route('/date-filter')
 def date_filterdb():
-    return render_template('home/date-filter.html')
+    return render_template('/date-filter.html')
 
-@app.route('/home/event-details')
+@app.route('/event-details')
 def event_detailsdb():
-    return render_template('home/event-details.html')
+    return render_template('/event-details.html')
 
-@app.route('/home/event-filter')
+@app.route('/event-filter')
 def event_filterdb():
-    return render_template('home/event-filter.html')
+    return render_template('/event-filter.html')
 
-@app.route('/home/home-original')
+@app.route('/home-original')
 def home_originaldb():
-    return render_template('home/home-original.html')
+    return render_template('/home-original.html')
 
-@app.route('/home/home.html')
+@app.route('/home.html')
 def home_htmldb():
-    return render_template('home/home.html')
+    return render_template('/home.html')
 
-@app.route('/home/location-filter')
+@app.route('/location-filter')
 def location_filterdb():
-    return render_template('home/location-filter.html')
+    return render_template('/location-filter.html')
 
-@app.route('/home/notifications')
+@app.route('/notifications')
 def notificationsdb():
-    return render_template('home/notifications.html')
+    return render_template('/notifications.html')
 
-@app.route('/home/payment')
+@app.route('/payment')
 def paymentdb():
-    return render_template('home/payment.html')
+    return render_template('/payment.html')
 
-@app.route('/home/register')
+@app.route('/register')
 def registerdb():
-    return render_template('home/register.html')
+    return render_template('/register.html')
 
-@app.route('/home/search-bar')
+@app.route('/search-bar')
 def search_bardb():
-    return render_template('home/search-bar.html')
+    return render_template('/search-bar.html')
 
-@app.route('/onboarding/onboarding-1')
+@app.route('/onboarding-1')
 def onboarding_1db():
-    return render_template('onboarding/onboarding-1.html')
+    return render_template('/onboarding-1.html')
 
-@app.route('/onboarding/onboarding-2')
+@app.route('/onboarding-2')
 def onboarding_2db():
-    return render_template('onboarding/onboarding-2.html')
+    return render_template('/onboarding-2.html')
 
-@app.route('/onboarding/onboarding-3')
+@app.route('/onboarding-3')
 def onboarding_3db():
-    return render_template('onboarding/onboarding-3.html')
+    return render_template('/onboarding-3.html')
 
-@app.route('/profile/bookmarks')
+@app.route('/bookmarks')
 def profile_bookmarksdb():
-    return render_template('profile/bookmarks.html')
+    return render_template('/bookmarks.html')
 
-@app.route('/profile/edit-profile')
+@app.route('/edit-profile')
 def profile_edit_profiledb():
-    return render_template('profile/edit-profile.html')
+    return render_template('/edit-profile.html')
 
-@app.route('/profile/feedback')
+@app.route('/feedback')
 def profile_feedbackdb():
-    return render_template('profile/feedback.html')
+    return render_template('/feedback.html')
 
-@app.route('/profile/my-events')
+@app.route('/my-events')
 def profile_my_events():
-    return render_template('profile/my-events.html')
+    return render_template('/my-events.html')
 
-@app.route('/profile/terms')
+@app.route('/terms')
 def profile_termsdb():
-    return render_template('profile/terms.html')
+    return render_template('/terms.html')
 
-@app.route('/pages/forgot-password')
+@app.route('/forgot-password')
 def forgot_passworddb():
     return render_template('forgot-password.html')
 
-@app.route('/pages/login')
+@app.route('/login')
 def logindb():
     return render_template('login.html')
 
@@ -116,9 +116,4 @@ def profile():
     return render_template('profile/terms.html')
 
 <<<<<<< HEAD
-'''
-=======
-if __name__ == '__main__':
-    app.run(debug=True)
-    '''
->>>>>>> 9aea05d8ffc479d391b2e784a4c0df9e06bd1cd1
+''' 
