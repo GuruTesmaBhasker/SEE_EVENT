@@ -320,11 +320,11 @@
     <script>
         // Header button functions
         function goToCreateEvent() {
-            window.location.href = 'create-event.html';
+            window.location.href = "{{ url_for('create_event_html') }}";
         }
 
         function goToProfile() {
-            window.location.href = '../profile/profile.html';
+            window.location.href = "{{ url_for('profile_html') }}";
         }
 
         // Search functionality
@@ -502,24 +502,24 @@
 
         // Filter functions
         function goToLocationFilter() {
-            window.location.href = 'location-filter.html';
+            window.location.href = "{{ url_for('location_filter_html') }}";
         }
 
         function goToEventFilter() {
-            window.location.href = 'event-filter.html';
+            window.location.href = "{{ url_for('event_filter_html') }}";
         }
 
         function goToDateFilter() {
-            window.location.href = 'date-filter.html';
+            window.location.href = "{{ url_for('date_filter_html') }}";
         }
 
         // Event functions
         function viewEventDetails(eventName) {
-            window.location.href = 'event-details.html?event=' + encodeURIComponent(eventName);
+            window.location.href = "{{ url_for('event_details_html', event=eventName) }}";
         }
 
         function registerForEvent(eventName) {
-            window.location.href = 'register.html?event=' + encodeURIComponent(eventName);
+            window.location.href = "{{ url_for('register_html', event=eventName) }}";
         }
 
         // Location filter functionality
